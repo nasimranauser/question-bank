@@ -1,0 +1,82 @@
+.note{padding: 10px 8px;}
+.note h2 {
+    border-bottom: 2px solid #3333339e;
+    padding-bottom: 4px;
+    font-weight: 600;
+    color: #374d64;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.note h2 svg {
+    width: 42px;
+    height: 40px;
+    border-radius: 6px;
+}
+.register {
+    padding: 18px 15px;
+    margin: 1rem 0.5rem;
+    border-radius: 4px;
+}
+.register :where(.note){}
+.register :where(.progress){}
+
+/* controls */
+.controls button{pad: 8px 12px;}
+/* reg content */
+.regcontent{}
+.regcontent :where(.field){display: flex;flex-direction: column; gap: 14px;
+padding: 6px 8px;
+}
+.regcontent :where(.field label){}
+.regcontent :where(.field input) {
+    height: 37px; padding: 0 5px;
+    border-radius: 5px;font-size: 16px;
+    border: 1px solid #ccc;width: 100%;
+}
+.regcontent :where(.field input):focus{
+    outline: none; border-color: green;
+}
+/* avater */
+.regcontent :where(.avater_field) {
+    background: #d1e2eb21;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    align-items: center;
+    border: 1px dashed #62595966;
+    border-radius: 5px;
+    margin-left: 6px;
+    margin-right: 6px;
+    padding: 14px;
+    margin-top: 13px;
+}
+.regcontent :where(.avater_field svg){    font-size: 30px;
+    color: #3339;
+    position: relative;
+    top: 6px;}
+.regcontent :where(.field label) {
+    font-size: 16px;
+    color: #333333e0;
+}
+.regcontent :where(.avater_field button){}
+/* controls */
+.controls {
+    text-align: right;
+    background: #c5d6df21;
+    padding-bottom: 15px;
+}
+.controls button {
+    padding: 6px 28px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 15px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+.controls button:nth-child(2){margin-left: 30px;margin-right: 10px;}
+.login_op{background-color: gainsboro; padding: 8px;text-align: center;}
+.login_op a{color: blue; font-size: 15px;}
+.login_op span{font-size: 15px; color: #292e32;}

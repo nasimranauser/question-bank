@@ -1,0 +1,15 @@
+.p2{}
+.p2 button {
+    background-color: #f0f0f091;
+    border-radius: 50%;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+}
+.p2 button:hover{
+ background-color:#ffff;
+ box-shadow: 2px 2px 5px 0 rgba(0,0,0,.2);
+}

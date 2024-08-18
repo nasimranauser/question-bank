@@ -1,0 +1,88 @@
+html, body{
+    background-color: #ffff;
+    width: auto; height: 100%; 
+    bottom: auto; right: auto;
+    color: rgba(0, 0, 0, 0.87);
+    font-family: Roboto, HelveticaNeue, Arial, sans-serif;
+    font-size: small;
+    margin: 0;
+    position: relative;
+    -webkit-font-smoothing: auto;
+    text-size-adjust: 100%;
+}
+.toastBody{font-size: 22px;}
+.clear::after{content: "";display: block;clear: both;}
+.mt2{margin-top: 2rem;}
+.wv9iH {fill: #70757a;}
+.YsLeY {align-items: center;display: flex;flex-direction: column;
+flex: 1 1;height: 100%;justify-self: center;
+position: relative;width: 100%;}
+.app_container{width: unset;
+padding-left: calc(50% - 384px);
+padding-right: calc(50% - 384px);}
+.app_content{ height: unset;
+flex-direction: unset;
+flex: 1;
+border-radius: 5px;
+box-shadow: 0 0 22px rgba(0, 0, 0, .44);
+padding-left: 12px;
+padding-right: 12px;
+padding-top: 6px;padding-bottom: 3px;}
+.slider-wrapper{border-radius: 4px;}
+.top_content{    display: flex;
+align-items: center;
+flex-shrink: 0;
+min-height: 40px;
+padding: 6px 4px;
+justify-content: flex-end;margin-bottom: 5px;
+border-bottom: 1px solid #cccccc6e;
+}
+.app_container :where(.p1){flex: 1;
+overflow: hidden;}
+.app_container :where(.p1 .profile) {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 3px;
+  padding-left: 3px;
+  border-radius: 50%;
+}
+.app_container :where(.p1 .avater){
+width: 56px; height: 56px;
+position: relative;z-index: 1;
+}
+.avater::after {
+    content: "";
+    display: block;
+    width: 60px;
+    background: #fefefe;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 52px;border-radius: 5px;
+  }
+.utxt{
+    padding: 3px 12px;
+    background: rgb(255, 255, 255);
+    border-left: 2px solid #00000008;
+    border-radius: 0 8px 8px 8px;
+}
+.app_container :where(.p1 .avater) img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    object-fit: cover;
+    object-position: top;
+  }
+.app_container :where(.p2){    display: flex;
+gap: 8px;
+margin-left: 12px;}
+.app_container :where(.p2 button){
+align-items: flex-start;
+background: transparent;
+border: none;
+display: flex;
+flex-shrink: 0;
+padding: 0;
+}
