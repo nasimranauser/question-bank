@@ -13,6 +13,7 @@ const router = express.Router();
 
 router.route('/').get(app.home);
 router.route('/register').post(app.register);
+router.route('/login').post(app.login);
 router.route('/cuser').get(authMiddleware, app.cuser);
 router.route('/test').post(app.test);
 

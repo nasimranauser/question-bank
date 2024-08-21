@@ -1,28 +1,31 @@
 import React from 'react'
 import '../assets/styles/Navbar.css'
-import { WiSolarEclipse } from "react-icons/wi";
+import { FaUser } from "react-icons/fa6";
+import { BiLogIn } from "react-icons/bi";
 import {useAuth} from '../context/auth';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import userimg from '../../public/user.jpg'
 function Navbar() {
   const navigate = useNavigate();
   const {token, cUser, removeToken, isAuth} = useAuth();
+  console.log(`auth val ${isAuth}`);
   const logoutNow = ()=>{
-    removeToken();
-    // if auth then show close icon, else show login icon
-    navigate('/')
+    navigate('/logout');
   }
   return (
     <div className="top_content">
     <div className="p1">
         <div className="profile">
             <div className="avater">
-              {isAuth ? <img src={userimg} title={cUser.name} alt={cUser.name} /> : ''}
+              {isAuth == false ? <NavLink to={'/register'}><FaUser /> Create Account</NavLink> : ''} 
+              {isAuth == true ? <img src={userimg} title={ cUser.name} alt={cUser.name} /> : ''}
             </div>
-            <div className='utxt'>
-            <h3 style={{color:'rgb(79, 63, 63)',fontSize:17.5,}}>{cUser.name} | {cUser.institute} </h3>
-            <p>Last active: 11 Aug 2024, 9:00AM</p>
-            </div>
+           
+            {isAuth == true ? <div className='utxt'>
+              <h3 style={{color:'rgb(79, 63, 63)',fontSize:17.5,}}>{cUser.name} | {cUser.institute} </h3>
+              <p>Last active: 11 Aug 2024, 9:00AM</p>
+              </div>  : ''}
+            
         </div>
     </div>
     <div className="p2">
@@ -37,7 +40,13 @@ function Navbar() {
                 </button>
                 
                 <div className="gXQlA k4o2Hc" jsname="V68bde" style={{display:'none'}} data-ved="2ahUKEwicmrDs8dWGAxVJSGwGHaK_CRAQ5D96BAgAEAs"><div jscontroller="ST7cxc" jsmodel="L1J2dc" data-sms="" data-fbm="" data-sf="43" data-sm="5" data-sp="1" data-shem="abme,ssic,trie" data-hveid="CAAQDA" className="wIk0sb" role="button" tabIndex="0" jslog="189815;ved:2ahUKEwicmrDs8dWGAxVJSGwGHaK_CRAQ98oLegQIABAM;track:click" jsaction="d2OwS:MM34Cf;MYwIPc;JIbuQc:MYwIPc"><div jsname="YOuPgf" data-ved="2ahUKEwicmrDs8dWGAxVJSGwGHaK_CRAQgK8MegQIABAN" className="OKZdtc" jslog="202624;ved:2ahUKEwicmrDs8dWGAxVJSGwGHaK_CRAQgK8MegQIABAN;track:click"><svg className="sFT5O indIKd gRAwSd" viewBox="0 0 24 24" focusable="false" height="20" width="20"><path d="M0 0h24v24H0z" fill="none"></path><path d="M18 16c-.79 0-1.5.31-2.03.81L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.53.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.48.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.05 4.12c-.05.22-.09.45-.09.69 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3zm0-12c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM6 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm12 7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"></path></svg><span className="indIKd wEzsrc cS4Vcb-pGL6qe-lfQAOe">শেয়ার করুন</span></div></div><a jscontroller="pHHwKf" jsaction="VQKSsc:qdhiVe;wSc0Ee:n6NZAb;uyzWMd:rSzake;qdhiVe;" className="wIk0sb" role="button" tabIndex="0" data-immersive="true" data-ved="2ahUKEwicmrDs8dWGAxVJSGwGHaK_CRAQ9S16BAgAEA4" data-bucket="Report-this-Result IS" data-psd="feedbackType:Report this result;featureId:IMAGES;searchResultUrl:https://bn.quora.com/graha-kayati-ki-ki;docId:LZ8Avi0wgE2BXM;"><svg className="sFT5O indIKd gRAwSd" viewBox="0 0 24 24" focusable="false" height="20" width="20"><path d="M0 0h24v24H0z" fill="none"></path><path d="M14 6l-1-2H5v17h2v-7h5l1 2h7V6h-6zm4 8h-4l-1-2H7V6h5l1 2h5v6z"></path></svg><span className="indIKd wEzsrc cS4Vcb-pGL6qe-lfQAOe">মতামত দিন</span></a></div></div><div className="SLLhk"><button jsaction="trigger.Hqc3Od" className="uj1Jfd wv9iH iM6qI" jsname="tqp7ud" aria-label="বন্ধ করুন" data-ved="2ahUKEwicmrDs8dWGAxVJSGwGHaK_CRAQiRx6BAgAEA8" jslog="3593;ved:2ahUKEwicmrDs8dWGAxVJSGwGHaK_CRAQiRx6BAgAEA8;track:click">
-                  <div title='Logout Profile' onClick={logoutNow} className="ioQ39e wv9iH MjJqGe  cd29Sd mitem" jsname="vbgB1c"><svg viewBox="0 0 24 24" focusable="false" height="24" width="24"><path d="M0 0h24v24H0z" fill="none"></path><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></div>
+                {isAuth ? <div title='Logout Profile' onClick={logoutNow} className="ioQ39e wv9iH MjJqGe  cd29Sd mitem" jsname="vbgB1c"><svg viewBox="0 0 24 24" focusable="false" height="24" width="24"><path d="M0 0h24v24H0z" fill="none"></path><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></div> : 
+                
+                <div title='Logout Profile' onClick={()=> navigate('/login')} className="ioQ39e wv9iH MjJqGe  cd29Sd mitem" jsname="vbgB1c">
+                <BiLogIn />
+                </div>
+                 }
+                
                 </button></div>
 </div>
 </div>

@@ -13,7 +13,7 @@ export const AuthProvider = ({children})=>{
     // store token
     const storeTokenLS = async (servertoken)=>{
         setToken(servertoken)
-        return localStorage.setItem('token', servertoken);
+        return localStorage.setItem('token', servertoken); 
     }
     // remove token
     const removeToken = async()=>{

@@ -1,0 +1,61 @@
+.lcontent{box-shadow: 1px 1px 3px 0 rgba(0,0,0,.2);
+background-color: #fefefe;border-radius: 5px;
+}
+.loadings{width: 50%;height: 2px;background-color: red;}
+    .cfield {
+        border: 1px solid #abadb3b2;
+        padding: 6px;
+        background-color: #ffff;
+        border-radius: 5px;
+        margin: 10px 5px;margin-top: 30px;
+        position: relative;
+}
+.cfield svg {
+    padding: 4px 0px;
+    font-size: 29px;
+    background-color: #fefefe;
+    position: absolute;
+    left: 4px;
+    top: -16px;
+    border-radius: 5px;
+  }
+.cfield label{margin-bottom: 5px;
+    padding-left: 6px;
+    width: 30%;
+    font-size: 17px;
+    color: #333333c9;
+    display: inline-block;}
+.cfield input {
+    font-size: 17px;
+    text-align: center;
+    margin-left: 6px;
+        width: 69%;
+        height: 45px;
+        border-radius: 6px;
+        padding: 10px;
+        border: 1px solid #cccccc5c;
+  }
+
+.fieldtermbtn{border: 1px solid #ddd;
+padding: 12px;text-align: center;
+display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fieldtermbtn label{}
+.fieldtermbtn label input{}
+
+.fieldtermbtn div{}
+.fieldtermbtn div button{width: 120px;
+    padding: 8px 0;
+    font-size: 16px;
+    margin-left: 15px;
+    border: 1px solid #cccc;
+    border-radius: 5px;
+  }
+
+.forgotfield{text-align: center;box-shadow: 2px 2px 6px 0 rgba(0,0,0,.2);
+padding: 12px;
+}
+.forgotfield a{}
+

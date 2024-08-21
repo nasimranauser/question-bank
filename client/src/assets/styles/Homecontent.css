@@ -157,16 +157,24 @@ svg{flex: none;}
   border-bottom: 0px !important;
 }
 
+element {
+}
+.inform .history:nth-child(1) {
+  margin-left: 0%;
+
+}
 .inform .history {
-    padding: 10px 8px;
-    width: calc(100% - 2%);
-    text-align: center;
-    border-radius: 5px;
-    margin: 0 1%;
-    transition: all 0.2s ease-in-out;
-    background-color: #fefefe;
-    border: 1px solid #cccc;
-    cursor: pointer;
+  padding: 10px 8px;
+  width: calc(100% - 2%);
+  text-align: center;
+  margin: 0 1%;
+    margin-left: 1%;
+  transition: all 0.2s ease-in-out;
+  background-color: #fefefe;
+  border: 1px solid #d7e3e3;
+  cursor: pointer;
+  border-radius: 8px;
+
 }
 .inform .history:hover{
     box-shadow: 2px 2px 18px 0 rgba(0, 0, 0, .2);

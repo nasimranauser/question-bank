@@ -7,7 +7,7 @@ import { MdPermContactCalendar } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
 import '../assets/styles/Register.css'
 import { useAuth } from '../context/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function Registercontent() {
@@ -46,30 +46,94 @@ function Registercontent() {
     }
     const next = ()=>{
         if(form1){
+            // check idenity, step 4 = gendar, relagion, img
+            if(user.name=='' && user.dob=='' && user.fname=='' && user.mname==''){
+                toast.warning('student information is required')
+            }
+            else if(user.name==''){
+                toast.warning('Please enter your name!')
+            }else if(user.dob==''){
+                toast.warning('Please enter your date of birth!')
+            }else if(user.fname==''){
+                toast.warning('Please enter your father name!')
+            }else if(user.mname==''){
+                toast.warning('Please enter your mother name!')
+            }else{
             setForm1(false)
             setForm2(true)
             setForm3(false)
+            }
         }else if(form2){
+            if(user.village==''){
+                toast.warning('Please enter village name!')
+            }else if(user.postcode==''){
+                toast.warning('Please enter postal name!')
+            }else if(user.upazilla==''){
+                toast.warning('Please select upazilla name!')
+            }else if(user.zilla==''){
+                toast.warning('Please select zilla name!')
+            }else{
             setForm1(false)
             setForm2(false)
             setForm3(true)
+            }  
         }
         else if(form3){
+            // submit this,
+            if(user.institute==''){
+                toast.warning('Please select your institute name!')
+            }else if(user.session==''){
+                toast.warning('Please select your session!')
+            }else if(user.classref==''){
+                toast.warning('Please select your class!')
+            }else if(user.deparmentref==''){
+                toast.warning('Please select your deparment!')
+            }else{
             setForm1(false)
             setForm2(false)
             setForm3(false)
             setForm4(true)
+            }
         }
-
     }
     
     const back = ()=>{
-
+        // let's check
+        if(form2==true){
+            setForm2(false);
+            setForm1(true);
+            setForm3(false);
+            setForm4(false);
+        }else if(form3==true){
+            setForm3(false)
+            setForm2(true)
+            setForm1(false)
+            setForm4(false)
+        }else if(form4==true){
+            setForm4(false)
+            setForm3(true)
+            setForm2(false)
+            setForm1(false)   
+        }
+        else{
+            setForm1(true)
+            setForm2(false)
+            setForm3(false)
+            setForm4(false)
+        }
     }
 
     const submit = async()=>{
+        // loading start
         const url = 'http://localhost:3000/api/auth/register';
-            try{
+        if(user.phone==''){
+            toast.warning('Enter your phone number!')
+        }else if(user.ipaddress==''){
+            toast.warning('Ip address is empty!')
+        }else if(user.devicelocation==''){
+            toast.warning('device identity is missing!')
+        }else{
+                try{
                 const response = await fetch(url, {
                     method: "POST",
                     headers: {
@@ -82,13 +146,15 @@ function Registercontent() {
                 if(response.ok){
                     toast.success("Account created success.")
                 storeTokenLS(res_data.token)
-                // navigate home dir
+                // navigate home 
+                navigate('/login')
             }else{
                 console.log(res_data)
             }
             }catch(err){
                 console.log(`request sending err ${err}`)
             }
+        }            
     }
     const handleDateSelect = ()=>{}
 
@@ -100,9 +166,9 @@ function Registercontent() {
     <div className="regcontent">
 
         {form1 ? <div className="part_i">
-           <div className="field avater_field">
-               <label htmlFor="0"><AiOutlineDrag / > Upload Student Image</label>
-           </div>
+            <div className="field">
+            <label style={{display:'flex', alignItems:'center', justifyContent:'center', gap:2}} htmlFor="0"><CiLocationOn style={{fontSize:'26px', fontWeight:600}} / >Fillup your primary info</label>
+        </div>
            <div className="field">
                <label htmlFor="a">Name of the student</label>
                <input type="text" name='name' onChange={(e)=> handleInput(e)} value={user.name}  />
@@ -191,21 +257,12 @@ function Registercontent() {
                <label htmlFor="d">Current Device Location</label>
                <input type="text" onChange={(e)=> handleInput(e)} name='devicelocation' value={user.devicelocation} />
            </div>    
-           <div className="field">
-               <label htmlFor="a">Verifed Mobile number</label>
-               <input disabled type="number" onChange={(e)=> handleInput(e)} name='otp'  />
-               <button>Send OTP</button>
-           </div>
        </div>
        }
        
-
-       
-
        <div className="controls">
-           {form1 != true ? <button >Back</button> : <button >Reset</button> }
-           <button onClick={next}>Next</button>
-           <button onClick={submit}>submit</button>
+           {form1 != true ? <button onClick={back}>Back</button> : <button onClick={()=> location.reload()}>Reset</button> }
+           {form4 != true ? <button onClick={next}>Next</button> :  <button onClick={submit}>submit</button> }
        </div>
        <div className="login_op">
            <span>Already have an account?&nbsp;</span><a href="#"> Login Now</a>

@@ -30,12 +30,12 @@ const register = async (req, res, next)=>{
     try{
         const {phone, studentid} = req.body;
         // let's check mobile number
-        const userExits = await Student.findOne({contact_info:{phone: phone}});
+        const userExits = await Student.findOne({phone: phone});
         if(!userExits){
-            res.status(400).json({message: 'Invalid login credentials!'})
+          return res.status(400).json({message: 'Invalid login credentials!'})
         } 
-        const user = await userExits.comparePassword(studentid);
-        if(user){
+        
+        if(userExits.studentid==studentid){
             res.status(200).json({message: 'credential matched', token: await userExits.getToken(), 
                 userId: userExits._id.toString()});
         }else{
@@ -68,4 +68,4 @@ const test = async (req, res, next)=>{
     }
 }
 
-module.exports = {home, register, cuser, test,}
+module.exports = {home, register, login, cuser, test,}

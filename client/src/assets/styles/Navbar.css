@@ -1,3 +1,16 @@
+
+.avater a, .inform a{
+    width: 160px;
+    font-weight: 500;
+    color: #646cff;
+    text-align: center;
+    display: block;
+    background: #f0fefe;
+    padding: 8px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,.2);
+    font-size: 15px;
+    border-radius: 50px}
+    .inform a{border-radius: 5px;width: 100%;}
 .p2{}
 .p2 button {
     background-color: #f0f0f091;

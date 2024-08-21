@@ -13,6 +13,9 @@ import JoinScreen from './pages/Joinexamscreen';
 import Completedexamscreen from './pages/Completedexamscreen';
 import HistoryScreen from './pages/Historyscreen';
 import AccountScreen from './pages/Accountscreen';
+import ErrorScreen from './pages/ErrorScreen';
+import LoginScreen from './pages/LoginScreen';
+import { Logout } from './pages/Logout';
 
 
 function App() {
@@ -29,7 +32,6 @@ rtl={false}
 pauseOnFocusLoss
 draggable
 pauseOnHover
-bodyClassName="toastBody"
 theme="light"
 />
 <ToastContainer />
@@ -38,14 +40,15 @@ theme="light"
       <Routes>
         <Route path="/" element={<Homescreen />} /> 
         <Route path="/register" element={<Register />} /> 
-        <Route path="/login" element={<Register />} /> 
+        <Route path="/login" element={<LoginScreen />} /> 
+        <Route path="/logout" element={<Logout />} /> 
         <Route path="/overview/:exam/:id" element={<Examviewscreen />} /> 
         <Route path="/exam-joinned" element={<JoinScreen />} /> 
         <Route path="/question/:exam/:id" element={<Questionscreen />} />
         <Route path="/completed-exam" element={<Completedexamscreen />} /> 
         <Route path="/history" element={<HistoryScreen />} /> 
         <Route path="/my-profile" element={<AccountScreen />} /> 
-
+        <Route path='*' element={<ErrorScreen />} />
       </Routes>
     </BrowserRouter>
       </div>
