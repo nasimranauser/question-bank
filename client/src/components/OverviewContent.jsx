@@ -82,7 +82,7 @@ function OverviewContent() {
     }
   return (
     <div>
-      <div className="inform" style={{paddingBottom:13,borderRadius:3,marginBottom:5,borderRadius:5,}}>
+      <div className="inform mt63" style={{paddingBottom:13,borderRadius:3,marginBottom:5,borderRadius:5,}}>
 <div className="informlft">
    <div style={{display:'flex',}}>
     <a href="#" onClick={()=> navigate('/')}><MdOutlineArrowBack /> Back</a> &nbsp;&nbsp;&nbsp;&nbsp;

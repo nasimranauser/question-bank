@@ -142,7 +142,7 @@ function QuestionContent() {
   return (
     <div>
    
-    <div className="main_content" style={{borderRadius:5,position:'relative',height:212,}}>
+    <div className="main_content mt63" style={{borderRadius:5,position:'relative',height:212,}}>
         <div className='waiting'>
         <p><AiOutlineLoading className='loading' /> Comming Soon, 12 June 2024, 12:00PM</p>
          <FaWifi className='wifi' />

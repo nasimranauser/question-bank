@@ -124,10 +124,13 @@ function Content() {
             
         }
     }
+    const compare = ()=>{
+        
+    }
   return (
     <>
         <div className='main_row'>
-          <div className="main_content">
+          <div className="main_content mt63">
           <Carousel style={{width:'100%',}}>
                 <div>
                     <img src="./slide1.jpg" />
@@ -143,7 +146,7 @@ function Content() {
                 </div>
             </Carousel>
     </div>
-    <div onClick={addExam} className='notification' >
+    <div onClick={compare} className='notification' >
         <div> <h4 ><IoMdNotificationsOutline /> Your result has been published at 12:00PM.</h4></div>
        <div> <MdOutlineArrowCircleRight /></div>
     </div>
@@ -250,7 +253,9 @@ function Content() {
             )
            })}
     </div>
-
+<div>
+    Gallery
+</div>
 <div>
 
       

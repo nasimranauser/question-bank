@@ -10,6 +10,7 @@ html, body{
     -webkit-font-smoothing: auto;
     text-size-adjust: 100%;
 }
+.mt63{margin-top: 63px;}
 .clear::after{content: "";display: block;clear: both;}
 .mt2{margin-top: 2rem;}
 .wv9iH {fill: #70757a;}
@@ -28,13 +29,20 @@ padding-left: 12px;
 padding-right: 12px;
 padding-top: 6px;padding-bottom: 3px;}
 .slider-wrapper{border-radius: 4px;}
-.top_content{    display: flex;
-align-items: center;
-flex-shrink: 0;
-min-height: 40px;
-padding: 6px 4px;
-justify-content: flex-end;margin-bottom: 5px;
-border-bottom: 1px solid #cccccc6e;
+.top_content {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 40px;
+  padding: 6px 4px;
+  justify-content: flex-end;
+  border-bottom: 1px solid #cccccc6e;
+  position: fixed;
+  width: calc(100vh - 3vh);
+  top: 0;
+  background: #fefefe;
+  margin: auto;
+  z-index: 500;
 }
 .app_container :where(.p1){flex: 1;
 overflow: hidden;}

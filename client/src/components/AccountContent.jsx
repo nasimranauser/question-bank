@@ -19,7 +19,7 @@ function AccountContent() {
     const [enroll, setEnroll] = useState(null);
   return (
     <div>
-      <div className="inform pb0" style={{marginBottom:1,}}>
+      <div className="inform pb0 mt63" style={{marginBottom:1,}}>
 <div className="informlft" style={{paddingLeft:0,}}>
 
    <div>

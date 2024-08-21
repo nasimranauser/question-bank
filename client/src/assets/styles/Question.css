@@ -19,6 +19,7 @@
     background: repeating-linear-gradient(45deg, #e1e8e185, transparent 10px);
     border-bottom: 1px solid #cccc;
 }
+.mt63{margin-top: 63px;}
 .main_content .waiting p {
   padding: 16px 18px;
   background: #fefefe;

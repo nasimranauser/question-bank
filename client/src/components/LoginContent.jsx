@@ -49,7 +49,7 @@ function LoginContent() {
   return (
     <div>
       <div className='loadings'></div>
-       <div className='lcontent'>
+       <div className='lcontent mt63'>
          <div>
           <img src={icon} alt='asd' />
          </div>

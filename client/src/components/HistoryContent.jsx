@@ -47,7 +47,7 @@ function HistoryContent() {
 
   return (
     <div>
-      <div className="inform pb0">
+      <div className="inform pb0 mt63">
 <div className="informlft" style={{paddingLeft:0,}}>
    <div>
     <a href="#" onClick={()=> navigate('/')}><MdOutlineArrowBack /> Back</a> &nbsp;&nbsp;&nbsp;&nbsp;

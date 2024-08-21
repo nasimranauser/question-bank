@@ -9,7 +9,8 @@
     padding: 8px;
     box-shadow: 2px 2px 5px rgba(0,0,0,.2);
     font-size: 15px;
-    border-radius: 50px}
+    border-radius: 4px}
+    .avater a{background: linear-gradient(#adff2f3d,aliceblue);}
     .inform a{border-radius: 5px;width: 100%;}
 .p2{}
 .p2 button {

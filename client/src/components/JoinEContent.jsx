@@ -12,7 +12,7 @@ function QuestionContent() {
   return (
     <div>
    
-    <div className="main_content">
+    <div className="main_content mt63">
     </div>
     <div className="inform">
 <div>

@@ -4,6 +4,9 @@ import { AiOutlineDrag } from "react-icons/ai";
 import { MdAccountBox } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci";
 import { MdPermContactCalendar } from "react-icons/md";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 import "react-datepicker/dist/react-datepicker.css";
 import '../assets/styles/Register.css'
 import { useAuth } from '../context/auth';
@@ -159,15 +162,24 @@ function Registercontent() {
     const handleDateSelect = ()=>{}
 
   return (
-    <div className="register">
+    <div className="register mt63">
     <div className="note">
+        
        <h2><MdAccountBox / >Create -Student Account </h2>
     </div>
     <div className="regcontent">
 
         {form1 ? <div className="part_i">
-            <div className="field">
-            <label style={{display:'flex', alignItems:'center', justifyContent:'center', gap:2}} htmlFor="0"><CiLocationOn style={{fontSize:'26px', fontWeight:600}} / >Fillup your primary info</label>
+            <div className="field flexthis">
+           <div>
+           <label style={{display:'flex', alignItems:'center', justifyContent:'center', gap:2}} htmlFor="0"><IoIosInformationCircleOutline style={{fontSize:'22px', fontWeight:600}} / >Fillup your primary info</label>
+            </div>
+            <div className='statusicon'>
+                <IoIosCheckmarkCircleOutline />
+                <IoClose />
+                <IoClose />
+                <IoClose />
+            </div>
         </div>
            <div className="field">
                <label htmlFor="a">Name of the student</label>
