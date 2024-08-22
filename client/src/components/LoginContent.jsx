@@ -34,7 +34,7 @@ function LoginContent() {
             if(response.ok){
               storeTokenLS(rs.token)
                 toast.success('Login success.')
-                navigate('/')
+                navigate('/');
             }else{
                 toast.error(rs.message)
             }

@@ -19,24 +19,7 @@ const questionMiddleware = async (req, res, next)=>{
         let userId = isVerified.userId;
         // getting question ref exam. )) condition is not equal to ans question id.
         const isChecked = await Answer.find({examid:examId});
-        //const Q = await Question.find({identityexam: examId})
-        // start
-        const Q = await Question.find({examid:examId}).forEach(function(obj1){
-            const A = Answer.find({examid:examId}).forEach(function(obj2){
-                var equals = function(o1, o2){
-                    // here goes some compare code...modified from the SO link you have in the answer.
-                    if(o1._id == o2.questionid){
-                        return true;
-                        console.log('matched this question ')
-                    }else{console.log('not matched this question')}
-                };
-    
-                if(equals(ob1, obj2)){
-                    // Do what you want to do
-                }
-            });
-        });
-        // end
+        const Q = await Question.find({identityexam: examId})
         // const Q = await Question.find({identityexam: examId, _id: { $ne: isChecked.questionid }})
         // console.log(`Answer record: ${isChecked}`)
         if(Q.length===0){
@@ -53,3 +36,5 @@ const questionMiddleware = async (req, res, next)=>{
 }
 
 module.exports = questionMiddleware
+
+// box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset; // qscreen top.

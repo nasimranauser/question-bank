@@ -20,6 +20,8 @@ function QuestionContent() {
     const {token} = useAuth();
     const [liveData, setliveData] = useState([]);
     const [ansData, setansData] = useState([]);
+    const [ansLoading, setansLoading] = useState(false);
+
     useEffect( ()=>{
         getQuestion();
     },[])   
@@ -89,6 +91,7 @@ function QuestionContent() {
         if(ans.length < 1){
           return alert('answer is required!')
         }
+        setansLoading(params);
         // setsubmitLoading(params);
         // // back respone then.
         // setTimeout( ()=>{setsubmitLoading(false)},500)
@@ -118,10 +121,15 @@ function QuestionContent() {
             });
             const rsdata = await  response.json();
             if(response.ok){
-                console.log(rsdata.message)
                 // get load again question data. )) question data is compare to ans get question data.
                 // getQuestion()
                 // let's check rejecttype, then show message
+                // lets' store async storage.
+                // localStorage.setItem('exits_exam',[{
+                // }]);
+                // localStorage.setItem('complited_exam',[{
+                // }]);
+                setansLoading('')
                 if(rsdata.message){
                 toast.error('question is rejected.')
                 }else{
@@ -130,6 +138,7 @@ function QuestionContent() {
                 // loading.
             }else{
                 // console.log(rsdata.message)
+                setansLoading('')
                 toast.warning(rsdata.message)
             }
         }catch(err){
@@ -147,7 +156,6 @@ function QuestionContent() {
         <p><AiOutlineLoading className='loading' /> Comming Soon, 12 June 2024, 12:00PM</p>
          <FaWifi className='wifi' />
             <h2>HSC ICT Model Test Exam 2024</h2>
-           
             <div className='device'>
                 <CiMobile4 />
                 <MdPortableWifiOff />
@@ -161,7 +169,6 @@ function QuestionContent() {
  <a href="#" className='back' onClick={()=> navigate('/exam-joinned')}><MdOutlineArrowBack /> Back</a> &nbsp;&nbsp;&nbsp;&nbsp;
 
 </div>
-
         <div className="informlft time">
             <GiAlarmClock className='clock' />
             <span>3 Minute 5 Secounds / 15.00 minutes</span>
@@ -176,7 +183,8 @@ function QuestionContent() {
         {liveData.map( (r,i)=>{
             return(
                 <div key={i} className="txt_content">
-                    <div className='qloading'> Loading.. </div>
+                {ansLoading==r._id ?  <div className='qloading'> Loading.. </div> : ''}
+                   
                 <h1 className="indIKd GW0XC cS4Vcb-pGL6qe-fwJd0c">
                     <div className='count'>{i+1}</div>
                     {r.question}</h1>

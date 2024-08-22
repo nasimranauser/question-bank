@@ -12,7 +12,10 @@ import { MdOutlineArrowCircleRight } from "react-icons/md";
 import { GiPaperBoat } from "react-icons/gi";
 import { FaConnectdevelop } from "react-icons/fa";
 import { FiArrowRightCircle } from "react-icons/fi";
+import { useAuth } from '../context/auth';
+
 function Content() {
+  const {isAuth} = useAuth();
    useEffect( ()=>{
     getExam();
    },[]);
@@ -146,10 +149,14 @@ function Content() {
                 </div>
             </Carousel>
     </div>
-    <div onClick={compare} className='notification' >
-        <div> <h4 ><IoMdNotificationsOutline /> Your result has been published at 12:00PM.</h4></div>
+    {isAuth ?  <div className='notification' >
+        <div> <h4 ><IoMdNotificationsOutline /> Your result has been published at 12:00PM.  </h4></div>
        <div> <MdOutlineArrowCircleRight /></div>
-    </div>
+    </div> :  <div onClick={()=> navigate('/login')} className='notification' >
+        <div> <h4 ><IoMdNotificationsOutline /> Login  your student account here.  </h4></div>
+       <div> <MdOutlineArrowCircleRight /></div>
+    </div>}
+ 
     <div className="inform">
         <div className="history">
             <div className="counter">

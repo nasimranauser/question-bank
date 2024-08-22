@@ -16,6 +16,7 @@ import AccountScreen from './pages/Accountscreen';
 import ErrorScreen from './pages/ErrorScreen';
 import LoginScreen from './pages/LoginScreen';
 import { Logout } from './pages/Logout';
+import HomeRoute from './pages/HomeRoute';
 
 
 function App() {
@@ -39,6 +40,7 @@ theme="light"
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homescreen />} /> 
+        <Route path="/home" element={<HomeRoute />} /> 
         <Route path="/register" element={<Register />} /> 
         <Route path="/login" element={<LoginScreen />} /> 
         <Route path="/logout" element={<Logout />} /> 

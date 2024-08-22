@@ -60,6 +60,8 @@ function JoinContent() {
 <p> <TbCircleCheckFilled /> My Joinning Examination</p>
 </div>
 
+{enrollData.length == 0 ? <div style={{textAlign:'center',padding:15,}}> <h3>Not found in Enrolled Exam!</h3> </div> : ''}
+
 {enrollData.map( (r,i)=>{
     return(
       <div key={i} className="t2 tu">

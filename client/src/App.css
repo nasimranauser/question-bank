@@ -38,7 +38,7 @@ padding-top: 6px;padding-bottom: 3px;}
   justify-content: flex-end;
   border-bottom: 1px solid #cccccc6e;
   position: fixed;
-  width: calc(100vh - 3vh);
+  width: calc(100vh - 2vh);
   top: 0;
   background: #fefefe;
   margin: auto;

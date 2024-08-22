@@ -6,24 +6,24 @@ export const AuthProvider = ({children})=>{
     // define state
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [cUser, setUser] = useState([]);
-    // load data
-    useEffect( ()=>{
-        loadUser();
-    },[]);
     // store token
     const storeTokenLS = async (servertoken)=>{
         setToken(servertoken)
         return localStorage.setItem('token', servertoken); 
     }
-    // remove token
-    const removeToken = async()=>{
-        setToken(null)
-        return localStorage.removeItem('token');
-    }
     // check auth or not
     let isAuth = !!token;
+     // remove token
+     const removeToken = async()=>{
+        setToken('')
+        return localStorage.removeItem('token');
+    }
+
     // load function
-    
+        // load data
+        useEffect( ()=>{
+            loadUser();
+        },[]);
     const loadUser = async ()=>{
         const  url = 'http://localhost:3000/api/auth/cuser';
         try{

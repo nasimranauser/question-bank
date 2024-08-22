@@ -5,6 +5,8 @@ import { BiLogIn } from "react-icons/bi";
 import {useAuth} from '../context/auth';
 import { NavLink, useNavigate } from 'react-router-dom';
 import userimg from '../../public/user.jpg'
+import { CiHome } from "react-icons/ci";
+
 function Navbar() {
   const navigate = useNavigate();
   const {token, cUser, removeToken, isAuth} = useAuth();
@@ -29,6 +31,12 @@ function Navbar() {
         </div>
     </div>
     <div className="p2">
+ 
+    <button title='Back' onClick={() => navigate('/')} jsaction="trigger.NmtSIb" className="iM6qI" jsname="ttdpI" aria-label="আগের ছবি" data-ved="2ahUKEwicmrDs8dWGAxVJSGwGHaK_CRAQhRx6BAgAEAg">
+              <div className="wv9iH MjJqGe  cd29Sd" >
+               <CiHome style={{color:'#70757a',fontSize:24,position:'relative',left:'1px'}} />
+                </div>
+              </button>
             <button title='Back' onClick={() => navigate(-1)} jsaction="trigger.NmtSIb" className="iM6qI" jsname="ttdpI" aria-label="আগের ছবি" data-ved="2ahUKEwicmrDs8dWGAxVJSGwGHaK_CRAQhRx6BAgAEAg">
               <div className="wv9iH MjJqGe  cd29Sd" ><svg className="FJ6RFd" viewBox="0 0 24 24" focusable="false" height="28" width="28"><path d="M0 0h24v24H0z" fill="none"></path><path d="M8.59,16.59L13.17,12L8.59,7.41L10,6l6,6l-6,6L8.59,16.59z"></path></svg></div>
               </button>
@@ -48,6 +56,7 @@ function Navbar() {
                  }
                 
                 </button></div>
+                &nbsp;&nbsp;
 </div>
 </div>
   )

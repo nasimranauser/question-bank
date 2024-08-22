@@ -162,9 +162,9 @@
       background-color: #fbfdf8;
     }
     .lc{text-align: right;
-      font-size: 17px;
+      font-size: 14px;
       color: #333333c4;
-      margin-top: -17px;
+      margin-top: -15px;
       width: 100%;}
     .lc svg{font-size: 20px;}
     .pbtn button {
@@ -247,9 +247,9 @@
         .t3 .g{display: flex; align-items: center; gap: 120px;}
         .cancelexam{text-align: center;padding: 4px 0;}
         .cancelexam button{width: 100%;
+          font-size: 14px;
           padding: 4px;
           color: red;
-          font-size: 18px;
           background: #dcdcdc3d;
           border: none;
           display: flex;

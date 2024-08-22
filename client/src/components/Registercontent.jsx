@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import DatePicker from "react-datepicker";
-import { AiOutlineDrag } from "react-icons/ai";
+import { MdOutlineCastForEducation } from "react-icons/md";
 import { MdAccountBox } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci";
 import { MdPermContactCalendar } from "react-icons/md";
@@ -10,7 +10,7 @@ import { IoClose } from "react-icons/io5";
 import "react-datepicker/dist/react-datepicker.css";
 import '../assets/styles/Register.css'
 import { useAuth } from '../context/auth';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate, Navigate, NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function Registercontent() {
@@ -21,9 +21,9 @@ function Registercontent() {
     }
     // state managment
     const [user,setUser] = useState({
-        name:'', face:'face', dob:'', fname:'', mname:'', studentid:'id123',
+        name:'', face:'face', dob:'', fname:'', mname:'', studentid: `QB${Math.floor(Math.random() * 5)}ID`,
        village:'', postcode:'',upazilla:'',zilla:'',
-        email:'test@mail.com',phone:'',
+        email:'',phone:'',
         institute:'', session:'', classref:'', deparmentref:'',
         ipaddress:'',devicelocation:'',
     });
@@ -150,7 +150,7 @@ function Registercontent() {
                     toast.success("Account created success.")
                 storeTokenLS(res_data.token)
                 // navigate home 
-                navigate('/login')
+                navigate('/home')
             }else{
                 console.log(res_data)
             }
@@ -205,9 +205,17 @@ function Registercontent() {
            </div>    
        </div>  : 
         form2 ? <div className="part_i">
-           <div className="field">
-               <label style={{display:'flex', alignItems:'center', justifyContent:'center', gap:2}} htmlFor="0"><CiLocationOn style={{fontSize:'26px', fontWeight:600}} / > Fillup your identity</label>
-           </div>
+        <div className="field flexthis">
+           <div>
+           <label style={{display:'flex', alignItems:'center', justifyContent:'center', gap:2}} htmlFor="0"><CiLocationOn style={{fontSize:'26px', fontWeight:600}} / > Fillup your Identity</label>
+            </div>
+            <div className='statusicon'>
+                <IoIosCheckmarkCircleOutline />
+                <IoIosCheckmarkCircleOutline />
+                <IoClose />
+                <IoClose />
+            </div>
+        </div>
            <div className="field">
                <label htmlFor="a">Village</label>
                <input type="text" onChange={(e)=> handleInput(e)} name='village' value={user.village}  />
@@ -218,41 +226,98 @@ function Registercontent() {
            </div>
            <div className="field">
                <label htmlFor="c">Point Zilla</label>
-               <input type="text" onChange={(e)=> handleInput(e)} name='zilla' value={user.zilla} />
+               <select onChange={(e)=> handleInput(e)} name='zilla' value={user.zilla}>
+                 <option>Select One</option>
+                 <option value='Thakurgaon'>Thakurgaon</option>
+               </select>
+               
            </div>
            <div className="field">
                <label htmlFor="d">Point Upazilla</label>
-               <input type="text" onChange={(e)=> handleInput(e)} name='upazilla' value={user.upazilla} />
+               
+               <select onChange={(e)=> handleInput(e)} name='upazilla' value={user.upazilla}>
+                 <option>Select One</option>
+                 <option value='Haripur'>Haripur</option>
+                 <option value='Ranisankail'>Ranisankail</option>
+                 <option value='Pirganj'>Pirganj</option>
+                 <option value='Baliadangi'>Baliadangi</option>
+               </select>
            </div>    
        </div>  : form3 ? 
        <div className="part_i">
-           <div className="field">
-               <label style={{display:'flex', alignItems:'center', justifyContent:'center', gap:2}} htmlFor="0"><CiLocationOn style={{fontSize:'26px', fontWeight:600}} / > Fillup your Educational Background</label>
-           </div>
+       <div className="field flexthis">
+           <div>
+           <label style={{display:'flex', alignItems:'center', justifyContent:'center', gap:2}} htmlFor="0"><MdOutlineCastForEducation style={{fontSize:'26px', fontWeight:600}} / > Fillup your Educational background</label>
+            </div>
+            <div className='statusicon'>
+                <IoIosCheckmarkCircleOutline />
+                <IoIosCheckmarkCircleOutline />
+                <IoIosCheckmarkCircleOutline />
+                <IoClose />
+            </div>
+        </div>
+
            <div className="field">
                <label htmlFor="a">Institute Name</label>
-               <input type="text" onChange={(e)=> handleInput(e)} name='institute' value={user.institute} />
+               <select onChange={(e)=> handleInput(e)} name='institute' value={user.institute}>
+                <option>Select One</option>
+                <option value={'Ranisankail Degree College'}> Ranisankail Degree College</option>
+                <option value={'Pirganj Govt College'}> Pirganj Govt College</option>
+                <option value={'Ranisankail Govt High School'}> Ranisankail Govt High School</option>
+                <option value={'Ranisankail BM College'}> Ranisankail BM College</option>
+                <option value={'Gazirhat Degree College'}> Gazirhat Degree College</option>
+                <option value={'Nekmoroad Alimuddin Govt College'}> Nekmoroad Alimuddin Govt College</option>
+              </select>
            </div>
            <div className="field">
                <label htmlFor="b">Session</label>
-               <input type="text" onChange={(e)=> handleInput(e)} name='session' value={user.session} />
+               
+                <select onChange={(e)=> handleInput(e)} name='session' value={user.session}>
+                    <option>Select one</option>
+                    <option value='2024'>2024</option>
+                </select>
            </div>
            <div className="field">
                <label htmlFor="b">Class Name</label>
-               <input type="text" onChange={(e)=> handleInput(e)} name='classref' value={user.classref}/>
+               
+               <select onChange={(e)=> handleInput(e)} name='classref' value={user.classref}>
+                <option>Select One</option>
+                <option value={'Class VII'}> Class VII</option>
+                <option value={'Class VIII'}> Class VIII</option>
+                <option value={'Class X'}> Class X</option>
+                <option value={'Class XI'}> Class XI</option>
+                <option value={'HSC 1st Year'}> HSC 1st Year</option>
+                <option value={'HSC 2ndt Year'}> HSC 2nd Year</option> 
+              </select>
            </div>
            <div className="field">
                <label htmlFor="c">Deparment Name</label>
-               <input type="text" onChange={(e)=> handleInput(e)} name='deparmentref' value={user.deparmentref} />
+               
+               <select onChange={(e)=> handleInput(e)} name='deparmentref' value={user.deparmentref}>
+                <option>Select One</option>
+                <option value={'Null'}>Null</option>
+                <option value={'Sicence'}> Sicence</option>
+                <option value={'Humanity'}> Humanity</option>
+                <option value={'Business Studies'}> Business Studies</option>
+              </select>
            </div>
            
        </div>
 
             : 
             <div className="part_i">
-           <div className="field">
-               <label style={{display:'flex', alignItems:'center', justifyContent:'center', gap:2}} htmlFor="0"><MdPermContactCalendar style={{fontSize:'26px', fontWeight:600}} / > Contact Info & Current Device Info</label>
-           </div>
+            <div className="field flexthis">
+           <div>
+           <label style={{display:'flex', alignItems:'center', justifyContent:'center', gap:2}} htmlFor="0"><MdPermContactCalendar style={{fontSize:'26px', fontWeight:600}} / > Contact Info & Current Device Info</label>
+            </div>
+            <div className='statusicon'>
+                <IoIosCheckmarkCircleOutline />
+                <IoIosCheckmarkCircleOutline />
+                <IoIosCheckmarkCircleOutline />
+                <IoIosCheckmarkCircleOutline />
+            </div>
+        </div>
+    
            <div className="field">
                <label htmlFor="a">Mobile Number</label>
                <input type="number" onChange={(e)=> handleInput(e)} name='phone' value={user.phone} />
@@ -266,7 +331,7 @@ function Registercontent() {
                <input type="text" onChange={(e)=> handleInput(e)} name='ipaddress' disabled value={user.ipaddress} />
            </div>
            <div className="field">
-               <label htmlFor="d">Current Device Location</label>
+               <label htmlFor="d">Reference </label>
                <input type="text" onChange={(e)=> handleInput(e)} name='devicelocation' value={user.devicelocation} />
            </div>    
        </div>
@@ -277,7 +342,7 @@ function Registercontent() {
            {form4 != true ? <button onClick={next}>Next</button> :  <button onClick={submit}>submit</button> }
        </div>
        <div className="login_op">
-           <span>Already have an account?&nbsp;</span><a href="#"> Login Now</a>
+           <span>Already have an account?&nbsp;</span><NavLink to="/login"> Login Now</NavLink>
        </div>
     </div>
  </div>

@@ -39,7 +39,7 @@
 padding: 6px 8px;margin-bottom: 3px;
 }
 .regcontent :where(.field label){}
-.regcontent :where(.field input) {
+.regcontent :where(.field input), .regcontent :where(.field select) {
     height: 39px; padding: 0 5px;
     border-radius: 5px;font-size: 16px;
     border: 1px solid #ccc;width: 100%;

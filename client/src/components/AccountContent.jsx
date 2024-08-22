@@ -67,7 +67,7 @@ function AccountContent() {
             <th>Mobile No</th>
             <td>{cUser.phone}</td>
             <th>Student ID</th>
-            <td>#ID12345678</td>
+            <td>{cUser.studentid}</td>
         </tr>
         <tr>
             <th>P. Address</th>
