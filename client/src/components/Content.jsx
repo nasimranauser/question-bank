@@ -219,7 +219,7 @@ function Content() {
                 <div className="slcontent">{i+1}</div>
             </div>
               <div className="d">
-                {e.schedule.datetime}
+              {e.schedule.datetime}
               </div>
            </div>
            <div className="context">
@@ -243,10 +243,9 @@ function Content() {
            </div>
            <div className="ecp3" style={{background:'#fff'}}>
                 <ul>
-                    <li><strong>Main Mark:</strong> {e.marks.fullmark}</li>
+                    <li><strong>Full Mark:</strong> {e.marks.fullmark}</li>
                     <li><strong>Pass Mark:</strong> {e.marks.passmark}</li>
                     <li><strong>Negetive Mark:</strong> {e.marks.negetivemark}</li>
-                    <li><strong>Exam Schedule:</strong>  {e.schedule.datetime}</li>
                 </ul>
              </div>
            <div className="controls">
