@@ -11,10 +11,13 @@ const home = async (req, res)=>{
         next(err);
     }
 }
-
 const register = async (req, res, next)=>{
     try{
         const response = req.body;
+        const check = await Student.findOne({phone:response.phone});
+        if(check){
+            return res.status(405).json({message:'You have a already account ! Login now', status:false})
+        }
         const insertRecord = await Student.create(response);
         if(!insertRecord){
             return res.status(403).json({message:'Data inserting an error!'})

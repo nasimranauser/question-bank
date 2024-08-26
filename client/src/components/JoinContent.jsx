@@ -69,7 +69,7 @@ function JoinContent() {
 <p> <TbCircleCheckFilled /> My Joinning Examination</p>
 </div>
 
-{enrollData.length == 0 ? <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3>Not found in Enrolled Exam!</h3> </div> : ''}
+{enrollData.length == 0 ? <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3 style={{color:'#333333e8',fontWeight:500,}}>Not found in any Enrolled Examination!</h3> </div> : ''}
 
 {enrollData.map( (r,i)=>{
     // step 01

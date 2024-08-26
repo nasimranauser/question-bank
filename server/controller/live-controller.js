@@ -77,6 +77,7 @@ const get_cexam = async (req, res, next)=>{
 
 const completed = async(req, res, next)=>{
     try{
+        // const {uid, data} = req.body;
         res.status(200).json({message:'ok'})
     }catch(err){
         next(err)

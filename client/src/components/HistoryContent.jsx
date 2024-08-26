@@ -12,8 +12,8 @@ function HistoryContent() {
     const {isAuth, cUser, token} = useAuth();
     const navigate = useNavigate();
     const params = useParams();
-    const [cData, setcData] = useState([]);
-    const [enroll, setEnroll] = useState(null);
+    const [history, setcHistory] = useState([]);
+
 
     useEffect( ()=>{
         //loadUser();
@@ -63,7 +63,11 @@ function HistoryContent() {
 <div className="t1 t1a headline" style={{width:'110px',}}>
 <p > <MdHistory style={{fontSize:20,color:'green',}} /> History</p>
 </div>
-
+ {history.length==0 ?  <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3 style={{color:'#333333e8',fontWeight:500,}}>Your History is an empty!</h3> </div> 
+ : <div>
+        getting.
+    </div>
+    }
 {/* <div className="t2 tu">
     <table>
         <tr>
@@ -82,13 +86,6 @@ function HistoryContent() {
 
 </div> */}
 
-<div className="t2 tu" style={{boxShadow:'none'}}>
-    <table style={{background:'#ffff'}}>
-        <tr>
-            <th className='na' style={{textAlign:'center'}}> History Not found!</th> 
-        </tr>
-    </table>
-</div>
 
 </div>
 

@@ -153,7 +153,10 @@ function Registercontent() {
                 setTimeout( ()=>{
                     navigate('/home')
                 },500);
-            }else{
+                }else if(res_data.status==false){
+                    toast.error(res_data.message)
+                }
+             else{
                 console.log(res_data)
             }
             }catch(err){

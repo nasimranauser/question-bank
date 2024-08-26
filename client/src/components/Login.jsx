@@ -40,7 +40,10 @@ function Login() {
               if(response.ok){
                 storeTokenLS(rs.token)
                   toast.success('Login success.')
-                  navigate('/');
+                  setTimeout( ()=>{
+                    navigate('/')
+                  },500)
+                 
               }else{
                   toast.error(rs.message)
               }

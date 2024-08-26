@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../assets/styles/Navbar.css'
 import { FaUser } from "react-icons/fa6";
 import { BiLogIn } from "react-icons/bi";
@@ -9,10 +9,11 @@ import { CiHome } from "react-icons/ci";
 
 function Navbar() {
   const navigate = useNavigate();
-  const {token, cUser, removeToken, isAuth} = useAuth();
+  const {cUser, token , removeToken, isAuth} = useAuth();
   const logoutNow = ()=>{
     navigate('/logout');
   }
+
   return (
     <div className="top_content">
     <div className="p1">

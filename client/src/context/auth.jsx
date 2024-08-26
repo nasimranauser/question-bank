@@ -8,7 +8,7 @@ export const AuthProvider = ({children})=>{
     const [cUser, setUser] = useState([]);
     // store token
     const storeTokenLS = async (servertoken)=>{
-        setToken(servertoken)
+        setToken(servertoken);
         return localStorage.setItem('token', servertoken); 
     }
     // check auth or not
@@ -18,7 +18,6 @@ export const AuthProvider = ({children})=>{
         setToken('')
         return localStorage.removeItem('token');
     }
-
     // load function
         // load data
         useEffect( ()=>{
@@ -46,7 +45,7 @@ export const AuthProvider = ({children})=>{
     }
     
     
-    return <AuthContext.Provider value={{token, isAuth, storeTokenLS, removeToken, cUser}}>
+    return <AuthContext.Provider value={{token,cUser, isAuth, storeTokenLS, removeToken}}>
         {children}
     </AuthContext.Provider>
 }

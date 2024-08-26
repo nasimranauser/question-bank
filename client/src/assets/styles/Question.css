@@ -33,15 +33,21 @@
   margin-top: 10px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 1px 0px;
 }
-.main_content .waiting h2 {
+.main_content .waiting h3{
   background: #fff;
-  padding: 23px 15px;
+  padding: 16px 15px;
   margin: 15px auto;
   border-radius: 3px;
+  font-size: 19px;
   width: calc(100% - 2%);
   text-align: center;
-  /* box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset; */
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
 }
+.main_content .waiting h3 .loading{font-size: 24px;}
 .main_content .device {
   width: calc(100% - 5%);
   display: flex;

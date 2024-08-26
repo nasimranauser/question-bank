@@ -5,7 +5,7 @@ const joiningMiddleware = require('../middleware/joiningMiddleware');
 const questionMiddleware = require('../middleware/questionMiddleware')
 const ansMiddleware = require('../middleware/ans-middleware')
 const getansMiddleware = require('../middleware/gans-middleware');
-const completedMiddleware = require("../middleware/completed-middleware")
+const completedMiddleware = require("../middleware/completedMiddleware")
 
 const router = express.Router();
 const app = require('../controller/live-controller')

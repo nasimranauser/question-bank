@@ -19,18 +19,20 @@ function CompletedContent() {
      isAuth ?  gcdata() : '';
    },[]);
    const gcdata = async()=>{
-    const url = 'https://localhost:3000/api/exam/completed';
+    const url = 'http://localhost:3000/api/exam/completed';
     try{
         const response = await fetch(url, {
-            method:"POST",
+            method:"GET",
             headers:{
                 "Authorization": `Bearer ${token}`,
                 "Content-Type":"application/json"
             }
         });
+        const rs = await response.json();
         if(response.ok){
-            alert('ok')
-        }else{alert('oops!')}
+           console.log('ok');
+           
+        }else{console.log(rs.message)}
     }catch(err){
         console.error(err)
     }
@@ -46,7 +48,6 @@ function CompletedContent() {
 <div style={{paddingLeft:56, textAlign:'center'}}>
 </div>
 <div className="numinform ecount">
-    <span> Completed Examination: <span style={{color:'#d09014',fontWeight:'bold'}}>0</span></span>
 </div>
 </div>
 <div className="data_context" style={{height:'68.6vh'}}>
@@ -55,7 +56,7 @@ function CompletedContent() {
 <p> <TbCircleCheckFilled /> My Complited Examination</p>
 </div>
 {cData.length == 0 ? 
- <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3>Not found! You haven't Completed any Exam!</h3> </div> 
+ <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3 style={{color:'#333333e8',fontWeight:500,}}>Not found! You haven't Completed any Exam!</h3> </div> 
 :
 <div>
 <div className="t2 tu">
