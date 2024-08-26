@@ -3,15 +3,27 @@
 
 const Exam = require('../models/exam-model')
 const Enroll = require('../models/enrolled-model');
-const { get } = require('mongoose');
 const Question = require('../models/question-model');
 const Answer = require('../models/ans-model');
-// const Question = require('../models/question-model');
-// const Controller = require('../models/controll-model');
-// const Enroll = require('../models/enrolled-model');
-// const Answer = require('../models/ans-model');
+const Slide = require('../models/slide-model');
+
+
+
+
 
 // import controller function.
+
+const slide = async (req, res, next)=>{
+    try{
+        const data = await Slide.find();
+        if(!data){
+            return res.status(401).json({message:'preview slide not found!'})
+        }
+
+    }catch(err){
+        next(err)
+    }
+}
 
 const add_exam = async (req, res, next)=>{
     try{
@@ -38,10 +50,10 @@ const get_exam = async (req, res, next)=>{
     }
 }
 
-const get_cexam = async (req, ress, next)=>{
+const get_cexam = async (req, res, next)=>{
     try{
-        const eid = req.header('examid');
-        const sid = req.header('cstudent');
+        const eid = req.params.eid;
+        const sid = req.params.sid;
         let enrolled = false;
         // check already enrolled or not, then this based send response.
         if(sid !=null){
@@ -54,9 +66,10 @@ const get_cexam = async (req, ress, next)=>{
         }
         const result = await Exam.findById(eid);
         if(!result){
-            return ress.status(404).json({message:'Exam not getting..'})
+            return res.status(404).json({message:'Exam not getting..'})
         }
-        ress.status(201).json({message:'getting current exam', enroll: enrolled, edata: result})
+        res.status(201).json({message:'getting current exam', enroll: enrolled, data: result})
+    
     }catch(err){
         console.error(err)
     }
@@ -65,20 +78,18 @@ const get_cexam = async (req, ress, next)=>{
 const enrolled = async (req, res, next)=>{
     try{
         let enroll_data = req.data;
-        console.log(enroll_data);
-        
+        let exam_data = req.examdata;
         // #find already enrolled or not
         const check = await Enroll.findOne({userid: enroll_data.userid, examid:enroll_data.examid})
         if(check){
            return res.status(400).json({message:'sorry you have a already enrolled this exam!'})
         }
-
         // #save enrolled record.
         const saveEnrolled = await Enroll.create(enroll_data);
        if(!saveEnrolled){
             return res.status(405).json({message:'enrolled data faild to save!'})
        }
-       res.status(203).json({message:'save enrolled data.', endata:enroll_data})
+       res.status(203).json({message:'save enrolled data.', endata:enroll_data,examdata:exam_data})
 
     }catch(err){
         next(err)
@@ -143,75 +154,5 @@ const getans = async (req, res, next)=>{
         next(err)
     }
 }
-
-// const get_live_exam = async (req, res, next)=>{
-//     try{
-//         const params = req.params.id;
-//         const result = await Exam.findOne({_id:params});
-//         if(!result){
-//             return res.status(400).json({message: 'exam getting..'});
-//         }
-//         res.status(200).json({message: 'getting exam..', data: result});
-//     }catch(err){
-//         next(err)
-//     }
-// }
-
-
-// const get_question = async (req, res, next)=>{
-//     try{
-//         const params = req.params.eid;
-//         const response = await Question.find({identityexam:params});
-//         if(!response){
-//             return res.status(400).json({message: 'question dose not exits'});
-//         }
-//         res.status(200).json({message: 'question gettingg..', data: response})
-//     }catch(err){
-//         next(err);
-//     }
-// }
-
-// const get_controller = async (req, res, next)=>{
-//     try{
-//         const params = req.params.eid;
-//         const response = await Controller.findOne({examidentity:params});
-//         if(!response){
-//             return res.status(400).json({message: 'controlls not initialization!'})
-//         }
-//         res.status(200).json({message: 'getting controlls.', data: response});
-//     }catch(err){
-//         next(err)
-//     }
-// }
-
-// const get_answer = async (req, res, next)=>{
-//     try{
-//         const eid = req.params.eid;
-//         const uid = req.params.uid;
-//         const response = await Answer.find({examid:eid,userid: uid});
-//         if(!response){
-//             res.status(400).json({message: 'answer not submitted.', data: null,})
-//         }
-//         res.status(200).json({message: 'answer getting.', data: response});
-//     }catch(err){
-//         next(err)
-//     }
-// }
-
-// const asign_answer = async (req, res, next)=>{
-//     try{
-//         const data = req.body;
-//         const response = await Answer.create(data);
-//         if(response){
-//             res.status(200).json({messaeg: 'answer submitted.'});
-//         }else{
-//             res.status(400).json({messaeg: 'answer not submitted.'})
-//         }
-//     }catch(err){
-//         next(err);
-//     }
-// }
-
-
 
 module.exports = {add_exam, get_exam, get_cexam, enrolled, joiningexam,getquestion, addquestion, reciveanswer, getans};

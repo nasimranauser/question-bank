@@ -7,7 +7,7 @@
     justify-content: flex-start;
     line-height: 0;
     margin: 0 auto;
-    min-height: 20vh;
+    min-height: 112px !important;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -272,7 +272,7 @@
 .waiting{
   width: 100%;
   position: absolute;
-  top: 0;
+  top: 15px;
   left: 0;
 }
 .waiting h1:last-child{margin-top: 12px;

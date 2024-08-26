@@ -108,6 +108,7 @@ function QuestionContent() {
             timecount:'1 min 5 sec',
             reject:rs,
         }
+        
         // make request.
         const url = 'http://localhost:3000/api/exam/answer/put';
         try{
@@ -153,15 +154,10 @@ function QuestionContent() {
    
     <div className="main_content mt63" style={{borderRadius:5,position:'relative',height:212,}}>
         <div className='waiting'>
-        <p><AiOutlineLoading className='loading' /> Comming Soon, 12 June 2024, 12:00PM</p>
+        
          <FaWifi className='wifi' />
-            <h2>HSC ICT Model Test Exam 2024</h2>
-            <div className='device'>
-                <CiMobile4 />
-                <MdPortableWifiOff />
-                <IoLogoTableau />
-                <MdGroups />
-            </div>
+            <h2><AiOutlineLoading className='loading' /> 30 Aug 2024, 4:30PM</h2>
+            
         </div>
     </div>
     <div className="inform informq">
@@ -171,7 +167,7 @@ function QuestionContent() {
 </div>
         <div className="informlft time">
             <GiAlarmClock className='clock' />
-            <span>3 Minute 5 Secounds / 15.00 minutes</span>
+            <span>0 Minute 0 Secounds / 15.00 minutes</span>
    
         </div>
         <div className="numinform">

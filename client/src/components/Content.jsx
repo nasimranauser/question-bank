@@ -15,7 +15,7 @@ import { FiArrowRightCircle } from "react-icons/fi";
 import { useAuth } from '../context/auth';
 
 function Content() {
-  const {isAuth} = useAuth();
+  const {isAuth, cUser} = useAuth();
    useEffect( ()=>{
     getExam();
    },[]);
@@ -88,22 +88,48 @@ function Content() {
     const addExam = async(req, res)=>{
         const data = {
             name:"HSC Account Model Test Exam",
+            etype:"",
+            qtype:"",
             title:"Hsc accounting model test exam 2024",
             desc:" ",
             refurl:"Business study",
             marks:{
                 fullmark:150,
+                perqmark:2,
                 passmark:25,
                 negetivemark:0.25, 
             },
             schedule:{
                 datetime:1,
+                timespam:'12:00PM',
                 timehour:1,
                 timeminute:1,
             },
             identity:{
                 class:"SSC, HSC",
                 deparment:"Business Study",
+            },
+            authority:{
+                orgname:'',
+            },
+            award:{
+                a1:'',
+                a2:'',
+                a3:'',
+                a4:'',
+                a5:'',
+                a6:'',
+                a7:'',
+                a8:'',
+                a9:'',
+                a10:'',
+            },
+            rules:{
+                r1:'',
+                r2:'',
+                r3:'',
+                r4:'',
+                r5:'',
             },
             price:180,
         }
@@ -150,7 +176,7 @@ function Content() {
             </Carousel>
     </div>
     {isAuth ?  <div className='notification' >
-        <div> <h4 ><IoMdNotificationsOutline /> Your result has been published at 12:00PM.  </h4></div>
+        <div> <h4 ><IoMdNotificationsOutline /> Good Morning <span style={{color:'green'}}>{cUser.name}</span> Have an nice day.  </h4></div>
        <div> <MdOutlineArrowCircleRight /></div>
     </div> :  <div onClick={()=> navigate('/login')} className='notification' >
         <div> <h4 ><IoMdNotificationsOutline /> Login  your student account here.  </h4></div>
@@ -193,7 +219,7 @@ function Content() {
             <div className="counter">
                  <MdOutlineAccountCircle />
             </div>
-            <NavLink to={'/my-profile'}>
+            <NavLink to={isAuth ? '/my-profile' : '/login'}>
            <div className="infotxt">
             My Profile
            </div>
@@ -210,7 +236,9 @@ function Content() {
             <input type="search" /> <button>Search</button>
            </div> 
            </div>
+           {exam.length == 0 ? <div style={{textAlign:'center',padding:30,fontSize:15,color:'#333'}}><strong style={{borderBottom:'1px solid #333'}}>At the moment Not published any <span style={{color:'green'}}>Examination</span>! Please waite.</strong> </div> : ''}
            {exam.map( (e,i)=>{
+            const datetostr = new Date(e.schedule.datetime).toString().substring(0,15);
             return(
          <div key={i}>
           <div className="exam_live">
@@ -219,7 +247,7 @@ function Content() {
                 <div className="slcontent">{i+1}</div>
             </div>
               <div className="d">
-              {e.schedule.datetime}
+              {datetostr}
               </div>
            </div>
            <div className="context">
@@ -227,23 +255,24 @@ function Content() {
                 <ul>
                     <li><strong>Exam Name:</strong> {e.name}</li>
                     <li><strong>Joined Price:</strong> {e.price} Tk</li>
-                    <li><strong>Exam Authority:</strong> Self</li>
-                    <li><strong>Winner Credits:</strong> E-Book, Admission Book</li>
+                    <li><strong>Exam Authority:</strong> {e.authority.orgname}</li>
+                    <li><strong>Exam Reward:</strong> {e.award.a1 ? 'True': 'Null'}</li>
+                   
                 </ul>
              </div>
              <div className="ecp2">
                 <ul>
-                    <li><strong>Question Type:</strong> Input & Option</li>
-                    <li><strong>Per Question Mark:</strong> 2</li>
-                    <li><strong>Atlease Fillup Question:</strong> 40</li>
-                    <li><strong>Exam Qualification:</strong> SSC, HSC</li>
-                </ul>
+                <li><strong>Exam Type: </strong> {e.etype ? e.etype : 'Fee'}</li>
+                    <li><strong>Question Type:</strong> {e.qtype ? e.qtype : 'Default'}</li>
+                    <li><strong>Per Question Mark:</strong> {e.perqmark ? e.perqmark : '2'}</li>
+                    <li><strong>Exam Qualification:</strong> {e.identity.class ? e.identity.class : 'Global'}</li>
+                    </ul>
              </div>
             
            </div>
            <div className="ecp3" style={{background:'#fff'}}>
                 <ul>
-                    <li><strong>Full Mark:</strong> {e.marks.fullmark}</li>
+                    <li><strong>Full Mark of Exam:</strong> {e.marks.fullmark}</li>
                     <li><strong>Pass Mark:</strong> {e.marks.passmark}</li>
                     <li><strong>Negetive Mark:</strong> {e.marks.negetivemark}</li>
                 </ul>
@@ -259,9 +288,7 @@ function Content() {
             )
            })}
     </div>
-<div>
-    Gallery
-</div>
+
 <div>
 
       

@@ -1,4 +1,5 @@
 const Jwt = require('jsonwebtoken');
+const Exam = require('../models/exam-model');
 
 const enrollMiddleware = async (req, res, next)=>{
     const token = req.header('Authorization');
@@ -14,14 +15,21 @@ const enrollMiddleware = async (req, res, next)=>{
             const name = isVerified.name;
             const user_id = isVerified.userId;
             const { examid } = req.body;
+            // get exam info.
+            const exam = await Exam.findOne({_id:examid});
            let enroll_data = {
                 userid: user_id,
                 username: name,
                 examid: examid,
-                exname: 'HSC ICT EXAM',
-                inprice: 105, 
+                exname: exam.name,
+                inprice: exam.price, 
+                authority: exam.authority.orgname,
+                examdtime:exam.schedule.datetime,
+                examtime:exam.schedule.timespam
+                // add exam terms file.
             }
             req.data = enroll_data;
+            req.examdata = exam;
             console.log(`enrolled data ${enroll_data.userid}`)
             next();
         }else{

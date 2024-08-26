@@ -10,7 +10,7 @@ const app = require('../controller/live-controller')
 
 router.route('/add').post(app.add_exam);
 router.route('/get').get(app.get_exam);
-router.route('/getone').get(app.get_cexam);
+router.route('/get/:eid/:sid').get(app.get_cexam);
 router.route('/enroll').post(enrollMiddleware, app.enrolled);
 router.route('/joining').get(joiningMiddleware, app.joiningexam);
 router.route('/question/add').post(app.addquestion);

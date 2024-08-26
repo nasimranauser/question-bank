@@ -21,7 +21,7 @@ function Registercontent() {
     }
     // state managment
     const [user,setUser] = useState({
-        name:'', face:'face', dob:'', fname:'', mname:'', studentid: `QB${Math.floor(Math.random() * 5)}ID`,
+        name:'', face:'face', dob:'', fname:'', mname:'', studentid: `QB${Math.random().toString(36).substr(2, 9)}ID`,
        village:'', postcode:'',upazilla:'',zilla:'',
         email:'',phone:'',
         institute:'', session:'', classref:'', deparmentref:'',
@@ -150,7 +150,9 @@ function Registercontent() {
                     toast.success("Account created success.")
                 storeTokenLS(res_data.token)
                 // navigate home 
-                navigate('/home')
+                setTimeout( ()=>{
+                    navigate('/home')
+                },500);
             }else{
                 console.log(res_data)
             }
@@ -184,7 +186,7 @@ function Registercontent() {
            <div className="field">
                <label htmlFor="a">Name of the student</label>
                <input type="text" name='name' onChange={(e)=> handleInput(e)} value={user.name}  />
-           </div>
+               </div>
            <div className="field">
                <label htmlFor="b">Date of birth</label>
                <DatePicker name='dob'
@@ -282,10 +284,7 @@ function Registercontent() {
                
                <select onChange={(e)=> handleInput(e)} name='classref' value={user.classref}>
                 <option>Select One</option>
-                <option value={'Class VII'}> Class VII</option>
-                <option value={'Class VIII'}> Class VIII</option>
                 <option value={'Class X'}> Class X</option>
-                <option value={'Class XI'}> Class XI</option>
                 <option value={'HSC 1st Year'}> HSC 1st Year</option>
                 <option value={'HSC 2ndt Year'}> HSC 2nd Year</option> 
               </select>

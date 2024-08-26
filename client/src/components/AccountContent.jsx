@@ -29,8 +29,8 @@ function AccountContent() {
 
 </div>
 <div className='ptitle'></div>
-<div className='lc'> Last logged In: 11 February 2024, 12:00PM
-</div>
+{/* <div className='lc'> Last logged In: 11 February 2024, 12:00PM
+</div> */}
 <div className="numinform ecount">
 </div>
 </div>
@@ -40,7 +40,7 @@ function AccountContent() {
 
 <div className='profile_img'>
     <div className='content_img'>
-        <img src="./user.jpg" alt="" />
+        <img src="./profile.png" alt="" />
     </div>
 </div>
 <div className='accesslink'>
@@ -77,28 +77,21 @@ function AccountContent() {
             <th>School/ College</th>
             <td>{cUser.institute}</td>
             <th>Qualification</th>
-            <td>SSC - {cUser.session}</td>
+            <td>{cUser.classref} - {cUser.session}</td>
             
         </tr>
         <tr>
             <th>IP Address</th>
-            <td>{cUser.ipaddress}</td>
-            <th>Device Location</th>
-            <td>5120 Ranisankail</td>
-        </tr>
-        <tr>
-            <th>Join Date</th>
-            <td>01 August 2024</td>
-            <th>Last Login</th>
-            <td>18 September 2024, 12:00PM</td>
+            <td style={{color:'red'}}>{cUser.ipaddress}</td>
         </tr>
 
         <tr>
             <td colSpan={'4'}>
-                <div className='pbtn'>
-                <button><RiPrinterCloudFill /> Print Document</button>
+                <div className='pbtn' style={{color:'green',textAlign:'center',justifyContent:'center'}}>
+                {/* <button><RiPrinterCloudFill /> Print Document</button>
                 <button ><PiReadCvLogo /> Open Portfolio</button> 
-                <button ><IoSettingsOutline /> Edit Information</button> 
+                <button ><IoSettingsOutline /> Edit Information</button> */}
+                Development mode is turn on
                 </div>
             </td>
         </tr>

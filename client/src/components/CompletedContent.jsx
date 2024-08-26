@@ -35,7 +35,7 @@ function CompletedContent() {
 <div className="t1 t1a headline" style={{width:260,}}>
 <p> <TbCircleCheckFilled /> My Complited Examination</p>
 </div>
-{cData.length != 0 ? 
+{cData.length == 0 ? 
     <div className="t2 tu" style={{boxShadow:'none'}}>
     <table style={{background:'#ffff'}}>
         <tr>

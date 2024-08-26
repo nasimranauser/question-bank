@@ -23,6 +23,18 @@ const enrollSchema = new mongoose.Schema({
         type:Number,
         required:true,
     },
+    authority:{
+        type:String,
+        required:true,
+    },
+    examdtime:{
+        type:String,
+        required:true,
+    },
+    examtime:{
+        type:String,
+        required:true,
+    },
     payment:{
         cardname:{
             type:String,
@@ -44,6 +56,10 @@ const enrollSchema = new mongoose.Schema({
             type:String,
             default: false,
         },
+    },
+    completed:{
+        type:Boolean,
+        default:false
     },
     createat:{
         type:Date,

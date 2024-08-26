@@ -21,6 +21,11 @@
     padding: 4px 5px;
     box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, .1);
 }
+.ivbtn{width: 100%;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #cccc;
+  color: #915311;}
 .pb0{padding-bottom: 0px !important;}
     /* this content */
     .t1, .t2, .t3 {

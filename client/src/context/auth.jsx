@@ -22,7 +22,7 @@ export const AuthProvider = ({children})=>{
     // load function
         // load data
         useEffect( ()=>{
-            loadUser();
+            isAuth ? loadUser() : null 
         },[]);
     const loadUser = async ()=>{
         const  url = 'http://localhost:3000/api/auth/cuser';
@@ -41,7 +41,7 @@ export const AuthProvider = ({children})=>{
                 setUser(null);
             }
         }catch(err){
-            console.error(err)
+           console.log('')
         }
     }
     

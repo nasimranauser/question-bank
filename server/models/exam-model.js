@@ -5,6 +5,12 @@ const examSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    etype:{
+        type:String,
+    },
+    qtype:{
+        type:String,
+    },
     title: {
         type:String,
         required:true,
@@ -22,6 +28,9 @@ const examSchema = new mongoose.Schema({
             type:String,
             required:true,
         },
+        perqmark:{
+            type:String,
+        },
         passmark: {
             type:String,
             required:true,
@@ -36,14 +45,10 @@ const examSchema = new mongoose.Schema({
             type:String,
             required:true,
         },
-        timehour: {
+        timespam:{
             type:String,
             required:true,
         },
-        timeminute: {
-            type:String,
-            required:true,
-        }
    },
    identity: {
         class: {
@@ -55,11 +60,60 @@ const examSchema = new mongoose.Schema({
             required:true,
         }
     },
+   authority:{
+     orgname:{
+        type:String,
+        default:'RDC'
+     },
+   },
     award: {
-
+       a1:{
+        type:String,
+       },
+       a2:{
+        type:String,
+       },
+       a3:{
+        type:String,
+       },
+       a4:{
+        type:String,
+       },
+       a5:{
+        type:String,
+       },
+       a6:{
+        type:String,
+       },
+       a7:{
+        type:String,
+       },
+       a8:{
+        type:String,
+       },
+       a9:{
+        type:String,
+       },
+       a10:{
+        type:String,
+       },
     },
     rules: {
-
+        r1:{
+            type:String,
+        },
+        r2:{
+            type:String,
+        },
+        r3:{
+            type:String,
+        },
+        r4:{
+            type:String,
+        },
+        r5:{
+            type:String,
+        },
     },
     price:{
         type:String,

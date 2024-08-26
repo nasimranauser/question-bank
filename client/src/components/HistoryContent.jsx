@@ -63,7 +63,8 @@ function HistoryContent() {
 <div className="t1 t1a headline" style={{width:'110px',}}>
 <p > <MdHistory style={{fontSize:20,color:'green',}} /> History</p>
 </div>
-<div className="t2 tu">
+
+{/* <div className="t2 tu">
     <table>
         <tr>
             <th>Sl</th>
@@ -76,16 +77,18 @@ function HistoryContent() {
             <td>01 Jan 2024</td>
             <td>Joinned HSC ICT Pleminary Examination</td>
             <td style={{textAlign:'center'}}><button><CiCircleRemove style={{fontSize:29,color:'red'}} /></button></td>
-        </tr>
-      
-      
-
-        
+        </tr> 
     </table>
 
+</div> */}
+
+<div className="t2 tu" style={{boxShadow:'none'}}>
+    <table style={{background:'#ffff'}}>
+        <tr>
+            <th className='na' style={{textAlign:'center'}}> History Not found!</th> 
+        </tr>
+    </table>
 </div>
-
-
 
 </div>
 

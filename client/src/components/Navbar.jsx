@@ -4,13 +4,12 @@ import { FaUser } from "react-icons/fa6";
 import { BiLogIn } from "react-icons/bi";
 import {useAuth} from '../context/auth';
 import { NavLink, useNavigate } from 'react-router-dom';
-import userimg from '../../public/user.jpg'
+import userimg from '../assets/img/profile.png'
 import { CiHome } from "react-icons/ci";
 
 function Navbar() {
   const navigate = useNavigate();
   const {token, cUser, removeToken, isAuth} = useAuth();
-  console.log(`auth val ${isAuth}`);
   const logoutNow = ()=>{
     navigate('/logout');
   }
@@ -25,7 +24,7 @@ function Navbar() {
            
             {isAuth == true ? <div className='utxt'>
               <h3 style={{color:'rgb(79, 63, 63)',fontSize:17.5,}}>{cUser.name} | {cUser.institute} </h3>
-              <p>Last active: 11 Aug 2024, 9:00AM</p>
+              <p>Active status: <span style={{color:'green'}}>Online</span></p>
               </div>  : ''}
             
         </div>

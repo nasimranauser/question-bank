@@ -1,5 +1,6 @@
 const Jwt = require('jsonwebtoken');
 const Enroll = require('../models/enrolled-model');
+const Exam = require('../models/exam-model');
 
 const joiningMiddleware = async (req, res, next)=>{
     const token = req.header('Authorization');
@@ -16,11 +17,12 @@ const joiningMiddleware = async (req, res, next)=>{
         // get token value.
         const user_id = isVerified.userId;
         // get joining exam of this user
-        const JoineExam = await Enroll.find({userid: user_id});
+        const JoineExam = await Enroll.find({userid: user_id, completed:false});
         if(!JoineExam){
             res.status(404).json({message:'This user not joining any exam!', status:3,})
         }
-        console.log(JoineExam);
+        // exam info.
+        // #db.customer.aggregate([$lookup:{from: "exams", localField:"examid", foregnField:"_id", as: "exinfo"}]);
         // parse enrolled record, with object
         req.joindata = JoineExam;
         req.userid = user_id;
