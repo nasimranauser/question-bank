@@ -10,7 +10,14 @@
     /* box-shadow: 2px 2px 5px rgba(0,0,0,.1); */
     font-size: 15px;
     border-radius: 4px}
-    .avater a{background: linear-gradient(#adff2f3d,aliceblue);}
+    .avater a {
+        background: linear-gradient(#adff2f3d,aliceblue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      .avater a svg{font-size: 20px;color: green;}
     .inform a{border-radius: 5px;width: 100%;}
 .p2{}
 .p2 button {

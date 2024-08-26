@@ -75,6 +75,14 @@ const get_cexam = async (req, res, next)=>{
     }
 }
 
+const completed = async(req, res, next)=>{
+    try{
+        res.status(200).json({message:'ok'})
+    }catch(err){
+        next(err)
+    }
+}
+
 const enrolled = async (req, res, next)=>{
     try{
         let enroll_data = req.data;
@@ -155,4 +163,4 @@ const getans = async (req, res, next)=>{
     }
 }
 
-module.exports = {add_exam, get_exam, get_cexam, enrolled, joiningexam,getquestion, addquestion, reciveanswer, getans};
+module.exports = {add_exam, get_exam, get_cexam, enrolled, joiningexam, completed, getquestion, addquestion, reciveanswer, getans};

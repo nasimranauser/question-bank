@@ -15,7 +15,26 @@ function CompletedContent() {
     const navigate = useNavigate();
     const params = useParams();
     const [cData, setcData] = useState([]);
-
+   useEffect( ()=>{
+     isAuth ?  gcdata() : '';
+   },[]);
+   const gcdata = async()=>{
+    const url = 'https://localhost:3000/api/exam/completed';
+    try{
+        const response = await fetch(url, {
+            method:"POST",
+            headers:{
+                "Authorization": `Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        });
+        if(response.ok){
+            alert('ok')
+        }else{alert('oops!')}
+    }catch(err){
+        console.error(err)
+    }
+   }
   return (
     <div>
       <div className="inform pb0 mt63">
@@ -36,13 +55,7 @@ function CompletedContent() {
 <p> <TbCircleCheckFilled /> My Complited Examination</p>
 </div>
 {cData.length == 0 ? 
-    <div className="t2 tu" style={{boxShadow:'none'}}>
-    <table style={{background:'#ffff'}}>
-        <tr>
-            <th className='na' style={{textAlign:'center'}}><SiImessage /> Not have a any Completed Exam!</th> 
-        </tr>
-    </table>
-</div>
+ <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3>Not found! You haven't Completed any Exam!</h3> </div> 
 :
 <div>
 <div className="t2 tu">

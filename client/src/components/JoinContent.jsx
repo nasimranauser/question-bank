@@ -47,7 +47,6 @@ function JoinContent() {
         }
     }
     // this
-
   return (
     <div>
       <div className="inform pb0 mt63">
@@ -70,7 +69,7 @@ function JoinContent() {
 <p> <TbCircleCheckFilled /> My Joinning Examination</p>
 </div>
 
-{enrollData.length == 0 ? <div style={{textAlign:'center',padding:15,}}> <h3>Not found in Enrolled Exam!</h3> </div> : ''}
+{enrollData.length == 0 ? <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3>Not found in Enrolled Exam!</h3> </div> : ''}
 
 {enrollData.map( (r,i)=>{
     // step 01
