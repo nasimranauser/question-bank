@@ -72,51 +72,61 @@ function JoinContent() {
 {enrollData.length == 0 ? <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3 style={{color:'#333333e8',fontWeight:500,}}>Not found in any Enrolled Examination!</h3> </div> : ''}
 
 {enrollData.map( (r,i)=>{
-    // step 01
+    // getting
     const gdate = new Date(r.examdtime).toString().substring(0,15);
     const gtime = r.examtime;
-    // devided.
-    const gday = new Date(r.examdtime).getDate().toString();
-    const gmonth = new Date(r.examdtime).getMonth()+1;
-    // step 02
+    // machine
     const date = new Date().toDateString();
-    const time = new Date().toLocaleTimeString();
-    // devided.
-    const day = new Date(date).getDate().toString();
-    const month = new Date(date).getMonth()+1;
+    function AMPM(date) {
+        var hours = date.getHours();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        var strTime =  ampm;
+        return strTime;
+      }
+    function formatAMPM(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+      }
     // compare only day and month || houre.
-    let cday,cmonth;
-    cday = day >= gday ? day - gday : gday - day; 
-     cmonth = month >= gmonth ? month - gmonth : gmonth - month;
-    // hour and minute.
+     let message = '';
+     let start = false;
+     if(date==gdate){
+        message = 'Ready to Join Exam. Exam will be started a few moment later.';
+     }
+     // hour and minute equal.
+    var gampm = gtime.slice(-2);
     // step 1
-    const hour = new Date().getHours();
-    const min = new Date().getMinutes()
-    // step 2
-    let ghour =  gtime.substring(0,2);
-    let gmin = parseInt(gtime.substring(2,4));
-    // convert 
-    // ampm 8 stat, 9 start.
-    if(ghour[1]==":"){  
-     ghour = parseInt( gtime.substring(0,1));
-    }else{
-      ghour = parseInt( gtime.substring(0,2));
-    }
-    // compare.
-    let chour = ghour >= hour ? ghour - hour : hour - ghour;
-    let cminute = gmin >= min ? gmin - min : min - gmin;
-    // loop return evry 5 minute value, min==60 then call this function. is is equal then click go btn.
+     if(formatAMPM(new Date)==gtime){
+        // step 2
+        if(gampm == AMPM(new Date)){
+            // step 3
+            if(formatAMPM(new Date) >= gtime){
+                message = 'Exam is started now. Rush to the exam center';
+                start = true;
+             }
+        }
+     }
+     // check, 4:30 is constand, but 4:30 is not constand.
+    
     return(
-      <div key={i} className="t2 tu">
+      <div key={i} className={start ? "t2 tu sanim" : "t2 tu"}>
     <div className="quickinfo">
     <h3>{i+1}</h3>
-<marquee>Powered by - IT Satellite.</marquee>
-<span>{cmonth !=0? `${cmonth} Month` : ''} {cday} Days, {chour!=0 ? `${chour} Hours,`: ''}  {cminute !=0 ? `${cminute} Minutes`: 'Exam is Started'} </span>
+<marquee>{message} Powered by - IT Satellite.</marquee>
+<span>{gdate} {r.examtime} </span>
     </div>
     <table>
         <tbody>
         <tr key={1}><th>Exam name</th> <td>{r.exname}</td><th>Exam Authority</th><td>{r.authority}</td></tr>
-        <tr key={2}><th>Enrolled Price</th> <td>{r.inprice}Tk</td><th>Join Schedule</th> <td style={{textAlign:'center'}}>{gdate}, {r.examtime}</td></tr>
+        <tr key={2}><th>Enrolled Price</th> <td>{r.inprice}Tk</td><th>Join Schedule</th> <td style={{textAlign:'center'}}>{gdate}, {gtime}</td></tr>
         <tr key={3}><th>Print Terms</th> <td><button className='ivbtn'>Click to Download</button></td><th>Print Invoice</th> <td><button className='ivbtn'>Click to Download</button></td></tr>
         </tbody>
         

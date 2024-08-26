@@ -95,7 +95,16 @@
           padding: 4px 0 !important;
           border: none !important;
           color: #333;}
+.sanim{animation: san 1s ease-in-out infinite;}
+@keyframes san {
+  from{
+    background: #ffff;
+  }
+  to{
+    background:red;
 
+  }
+}
           .na svg{font-size: 21px;}
       .t1a button{display: flex;
         align-items: center;

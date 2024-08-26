@@ -24,7 +24,7 @@ function Navbar() {
             </div>
            
             {isAuth == true ? <div className='utxt'>
-              <h3 style={{color:'rgb(79, 63, 63)',fontSize:17.5,}}>{cUser.name} | {cUser.institute} </h3>
+              <h3 style={{color:'rgb(79, 63, 63)',fontSize:16,}}>{cUser.name} | {cUser.institute} </h3>
               <p>Active status: <span style={{color:'green'}}>Online</span></p>
               </div>  : ''}
             

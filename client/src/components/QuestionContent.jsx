@@ -156,12 +156,12 @@ function QuestionContent() {
         <div className='waiting'>
         
          <FaWifi className='wifi' />
-            <h3><AiOutlineLoading className='loading' /> &nbsp; 30 Aug 2024, 4:30PM</h3>
+            <h3><AiOutlineLoading className='loading' /> HSC ICT Exam  &nbsp; 30 Aug 2024, 4:30PM</h3>
             
         </div>
     </div>
     <div className="inform informq">
-<div className='this'>
+<div className='informlft'>
  <a href="#" className='back' onClick={()=> navigate('/exam-joinned')}><MdOutlineArrowBack /> Back</a> &nbsp;&nbsp;&nbsp;&nbsp;
 
 </div>
