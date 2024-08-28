@@ -130,7 +130,8 @@ const addquestion = async (req, res, next)=>{
 const getquestion = async (req, res, next)=>{
     try{
         const q = req.question;
-        res.status(200).json({message:'getting.', question: q})
+        const e = req.exam;
+        res.status(200).json({message:'getting.', exam:e, question: q})
     }catch(err){
         next(err)
     }

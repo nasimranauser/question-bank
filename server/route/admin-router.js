@@ -3,6 +3,8 @@ const app = require('../controller/admin-controller')
 const router = express.Router();
 
 // user
+router.route('/lookup').get(app.getcollection);
+router.route('/answer/delete').delete(app.ansdeleted);
 router.route('/user').get(app.getuser);
 router.route('/user/delete').delete(app.userdelete);
 // exam

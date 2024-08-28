@@ -5,6 +5,32 @@
 const Student = require("../models/student-model");
 const Exam = require('../models/exam-model');
 const Enroll = require("../models/enrolled-model");
+const Answer = require('../models/ans-model')
+
+// collection
+const getcollection = async(req, res, next)=>{
+    try{
+        const data = await Exam.aggregate([ { $lookup:{from: 'exams', localField:'examid', foreignField:'_id', as: 'attdata' } } ])
+        if(!data || data.length == 0){
+            return res.status(401).json({message:'data not found!'})
+        }
+        res.status(200).json({message:'ok', data:data})
+    }catch(err){
+        next(err)
+    }
+}
+
+const ansdeleted = async(req, res, next)=>{
+    try{
+        const op = await Answer.deleteMany();
+        if(!op){
+            return res.status(403).json({message:'faild to deleted!'})
+        }
+        res.status(202).json({message:'answer deleted!'})
+    }catch(err){
+        next(err)
+    }
+}
 
 // user
 const getuser = async(req, res, next)=>{
@@ -80,4 +106,4 @@ const enrolleddata = async (req, res, next)=>{
     }
 }
 
-module.exports = {getuser,userdelete,examcreate, exam,examdelete,enrolleddata}
+module.exports = {getcollection, ansdeleted, getuser,userdelete,examcreate, exam,examdelete,enrolleddata}

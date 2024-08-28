@@ -10,18 +10,25 @@ import { useAuth } from '../context/auth';
 import { toast } from 'react-toastify';
 
 function JoinContent() {
+   
     const [enrollData, setData] = useState([])
-    const [countdown, setcountdonw] = useState({})
+    const [reqload, setreqload] = useState(true)
     const {isAuth, cUser, token} = useAuth();
+    const [livedate,setlivedate] = useState(null);
+    // test
+        const test = ()=>{
+             return  setlivedate(new Date)
+        }
+        useEffect( ()=>{
+            test();
+        },[test]);
+    // test
     const navigate = useNavigate();
     useEffect( ()=>{
         getJoiningExam();
     },[])
     // get minute.
-    setInterval( ()=>{
-       const sec = new Date().getSeconds();
-        sec == 1 ? setcountdonw(true) : setcountdonw(false)
-    },1000);
+
     const getJoiningExam = async ()=>{
         const url = 'http://localhost:3000/api/exam/joining';
         try{
@@ -34,14 +41,14 @@ function JoinContent() {
             });
             const rsdata = await response.json();
             if(response.ok){
-                // console.log('getting joining exam.')
                 setData(rsdata.joinedata);
-                // setexamData(rsdata)
-                console.log(`full data ${rsdata}`)
+                setreqload(false);
             }else{
+                setreqload(false)
                 console.log('cannot getting joining exam!')
             }
         }catch(err){
+            setreqload(false)
             console.log(`Joining exam getting error ${err}`);
             
         }
@@ -54,9 +61,7 @@ function JoinContent() {
 
    <div>
     <a href="#" onClick={()=> navigate('/')}><MdOutlineArrowBack /> Back</a> &nbsp;&nbsp;&nbsp;&nbsp;
-   
    </div>
-
 </div>
 <div style={{paddingLeft:56, textAlign:'center'}}>
 </div>
@@ -69,7 +74,7 @@ function JoinContent() {
 <p> <TbCircleCheckFilled /> My Joinning Examination</p>
 </div>
 
-{enrollData.length == 0 ? <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3 style={{color:'#333333e8',fontWeight:500,}}>Not found in any Enrolled Examination!</h3> </div> : ''}
+{enrollData.length == 0 ? <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3 style={{color:'#333333e8',fontWeight:500,}}>{reqload ? 'Loading...' : 'Not found in any Enrolled Examination!'} </h3> </div> : ''}
 
 {enrollData.map( (r,i)=>{
     // getting
@@ -77,45 +82,46 @@ function JoinContent() {
     const gtime = r.examtime;
     // machine
     const date = new Date().toDateString();
-    function AMPM(date) {
-        var hours = date.getHours();
-        var ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        var strTime =  ampm;
-        return strTime;
-      }
-    function formatAMPM(date) {
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        minutes = minutes < 10 ? '0'+minutes : minutes;
-        var strTime = hours + ':' + minutes + ' ' + ampm;
-        return strTime;
-      }
+        function AMPM(date) {
+            var hours = date.getHours();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            var strTime =  ampm;
+            return strTime;
+          }
+        function formatAMPM(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            return strTime;
+          }
     // compare only day and month || houre.
      let message = '';
      let start = false;
+     let finish = false;
      if(date==gdate){
-        message = 'Ready to Join Exam. Exam will be started a few moment later.';
-     }
+        message = 'Ready to Join. Exam will be started a few moment later.';
      // hour and minute equal.
     var gampm = gtime.slice(-2);
     // step 1
-     if(formatAMPM(new Date)==gtime){
         // step 2
-        if(gampm == AMPM(new Date)){
-            // step 3
-            if(formatAMPM(new Date) >= gtime){
-                message = 'Exam is started now. Rush to the exam center';
-                start = true;
-             }
-        }
-     }
+            if(gampm == AMPM(livedate)){
+                // step 3
+                if(formatAMPM(livedate) >= gtime){
+                    message = 'Exam is started now. Rush to the exam center';
+                    start = true;
+                 }
+            }
+    }else if(date>gdate){
+        finish = true;
+        message = "Exami date is over!";
+    }
      // check, 4:30 is constand, but 4:30 is not constand.
-    
     return(
       <div key={i} className={start ? "t2 tu sanim" : "t2 tu"}>
     <div className="quickinfo">
@@ -123,6 +129,7 @@ function JoinContent() {
 <marquee>{message} Powered by - IT Satellite.</marquee>
 <span>{gdate} {r.examtime} </span>
     </div>
+    {finish ? <div style={{textAlign:'center'}}> <h3 style={{color:'red',marginBottom:8,}}>Exam is Finished</h3> </div> : ''}
     <table>
         <tbody>
         <tr key={1}><th>Exam name</th> <td>{r.exname}</td><th>Exam Authority</th><td>{r.authority}</td></tr>
@@ -137,9 +144,9 @@ function JoinContent() {
     
    
     <div className="btn_group">
-    <button><MdSettingsBackupRestore /> Return Exam</button>
+    <button disabled={finish? true : false}><MdSettingsBackupRestore /> Return Exam</button>
     <NavLink to={`/question/${r.exname}/${r.examid}`}>
-    <button><GoPackageDependents /> Go Exam Center</button>
+    <button disabled={finish? true : false}><GoPackageDependents /> Go Exam Center</button>
     </NavLink>
     
     </div>

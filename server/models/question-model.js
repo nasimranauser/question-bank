@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+// const bcrypt = require('bcryptjs');
 
 // create a schema
 const questionSchema = new mongoose.Schema({
     identityexam:{
+        type:String,
+        required:true,
+    },
+    a:{
+        type:String,
+        default:"a",
+    },
+    symbol:{
         type:String,
         required:true,
     },
@@ -45,27 +53,27 @@ const questionSchema = new mongoose.Schema({
     }
 });
 
-questionSchema.pre('save', async function(){
-    const question = this;
-    // let's check question is modified or not.
-    if(!question.isModified('hassanswer')){
-        next();
-    }
-    // all right.
-    try{
-        const saltRound = await bcrypt.genSalt(10);
-        const hass = await bcrypt.hash(question.hassanswer, saltRound);
-        question.hassanswer = hass;
-    }catch(err){
-        next(err);
-    }
-});
+// questionSchema.pre('save', async function(){
+//     const question = this;
+//     // let's check question is modified or not.
+//     if(!question.isModified('hassanswer')){
+//         next();
+//     }
+//     // all right.
+//     try{
+//         const saltRound = await bcrypt.genSalt(10);
+//         const hass = await bcrypt.hash(question.hassanswer, saltRound);
+//         question.hassanswer = hass;
+//     }catch(err){
+//         next(err);
+//     }
+// });
 
-questionSchema.methods.compareAns = async function(ans){
-    try{
-        return bcrypt.compare(ans, this.hassanswer);
-    }catch(err){console.error(err);}
-}
+// questionSchema.methods.compareAns = async function(ans){
+//     try{
+//         return bcrypt.compare(ans, this.hassanswer);
+//     }catch(err){console.error(err);}
+// }
 
 // answer need to question id, examid, userid.
 

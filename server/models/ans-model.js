@@ -3,15 +3,19 @@ const mongoose = require('mongoose');
 // answer schema
 const answerSchema = new mongoose.Schema({
     examid:{
-        type:String,
+        type:mongoose.Schema.ObjectId,
         required:true,
     },
-    userid:{
+    a:{
         type:String,
+        default:"a",
+    },
+    userid:{
+        type:mongoose.Schema.ObjectId,
         required:true,
     },
     questionid:{
-        type:String,
+        type:mongoose.Schema.ObjectId,
         required:true,
     },
     getanswer:{

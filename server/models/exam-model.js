@@ -119,6 +119,10 @@ const examSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    timetocomplete:{
+        type:Number,
+        required:true,
+    },
     publish: {
         type:Boolean,
         default:false,

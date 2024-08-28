@@ -17,9 +17,11 @@ import ErrorScreen from './pages/ErrorScreen';
 import LoginScreen from './pages/LoginScreen';
 import { Logout } from './pages/Logout';
 import HomeRoute from './pages/HomeRoute';
+import Examfinisehd from './pages/Examfinisehd';
 
 
 function App() {
+  // live getting internet status.
   return (
    <>
      <div className="app_container">
@@ -46,6 +48,7 @@ theme="light"
         <Route path="/logout" element={<Logout />} /> 
         <Route path="/overview/:exam/:id" element={<Examviewscreen />} /> 
         <Route path="/exam-joinned" element={<JoinScreen />} /> 
+        <Route path="/exam-finished" element={<Examfinisehd />} /> 
         <Route path="/question/:exam/:id" element={<Questionscreen />} />
         <Route path="/completed-exam" element={<Completedexamscreen />} /> 
         <Route path="/history" element={<HistoryScreen />} /> 

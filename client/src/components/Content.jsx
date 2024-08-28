@@ -20,6 +20,7 @@ function Content() {
     getExam();
    },[]);
    const [exam, setExam] = useState([]);
+   const [loadexam, setloadexam] = useState(true);
    // gettting question
     const getExam = async()=>{
         const url = 'http://localhost:3000/api/exam/get';
@@ -33,10 +34,11 @@ function Content() {
             const ress = await response.json();
             if(response.ok){
                 setExam(ress.edata);
-            }
+                setloadexam(false);
+            }else{setloadexam(false)}
         }catch(err){
             setExam([]);
-            console.error(err);
+           setloadexam(false)
         }
     }
   // getting question.
@@ -49,19 +51,20 @@ function Content() {
 
     const addQuestion = async()=>{
         const data = {
-            identityexam:"66ae4147771c96bf34164a7e",
-            question:"What is a CPU?",
+            identityexam:"66cb9bced6259f8571d9bef1",
+            symbol:'ক',
+            question:"Draw a simple table code in input box?",
             answer:" ",
-            qhint:"Advance computer operating system. ",
-            type:"1",
-            refurl:"testurl.png",
+            qhint:"html computer programming ",
+            type:"3", // type 1 is a option, type 2 is a image option, type 3 is a image and input.
+            refurl:"https://npscpt.edu.bd/api/html-table.png",
             option:{
-                oa:"Controll Processing Unit",
-                ob:"Controll Per Unit",
-                oc:"Contract Avoe Unit",
-                od:"Correct Avobe Utility"
+                oa:"",
+                ob:"",
+                oc:"",
+                od:""
             },
-            hassanswer:"a"
+            hassanswer:"<table><tr><th></th></tr><tr><td></td></tr></table>"
         }
         const url = 'http://localhost:3000/api/exam/question/add';
         try{
@@ -156,6 +159,29 @@ function Content() {
     const compare = ()=>{
         
     }
+
+    const lookupdata = async()=>{
+        try{
+            const url = 'http://localhost:3000/api/admin/lookup';
+            const response = await fetch(url, {
+                method:"GET",
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            });
+            const rs = await response.json();
+            if(response.ok){
+                console.log('success');
+                console.log(rs.data);
+            }else{
+                console.log('faild!')
+                console.log(rs.message)
+            }
+        }catch(err){
+            console.log(`request send error ${err}`);
+        }
+    }
+
   return (
     <>
         <div className='main_row'>
@@ -175,7 +201,7 @@ function Content() {
                 </div>
             </Carousel>
     </div>
-    {isAuth ?  <div className='notification' >
+    {isAuth ?  <div className='notification' onClick={lookupdata}>
         <div> <h4 ><IoMdNotificationsOutline /> Good Morning <span style={{color:'green'}}>{cUser.name}</span> Have an nice day.  </h4></div>
        <div> <MdOutlineArrowCircleRight /></div>
     </div> :  <div onClick={()=> navigate('/login')} className='notification' >
@@ -236,7 +262,7 @@ function Content() {
             <input type="search" /> <button>Search</button>
            </div> 
            </div>
-           {exam.length == 0 ? <div style={{textAlign:'center',padding:30,fontSize:15,color:'#333'}}><strong style={{borderBottom:'1px solid #333'}}>At the moment Not published any <span style={{color:'green'}}>Examination</span>! Please waite.</strong> </div> : ''}
+           {exam.length == 0 ? <div style={{textAlign:'center',padding:30,fontSize:15,color:'#333'}}>{loadexam ? 'Loading... Please wait!' : <strong style={{borderBottom:'1px solid #333'}}> At the moment Not published any <span style={{color:'green'}}>Examination</span>! Please waite.</strong>} </div> : ''}
            {exam.map( (e,i)=>{
             const datetostr = new Date(e.schedule.datetime).toString().substring(0,15);
             return(

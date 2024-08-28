@@ -11,6 +11,7 @@ const home = async (req, res)=>{
         next(err);
     }
 }
+
 const register = async (req, res, next)=>{
     try{
         const response = req.body;
