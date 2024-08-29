@@ -4,7 +4,7 @@ import '../assets/styles/Footer.css'
 function Footer() {
   return (
     <div className="footer">
-    <span>&copy; All right reserved Examination -2024</span>
+    <span>&copy; All right reserved <span style={{color:'green'}}>Question Bank</span> -2024</span>
 </div>
   )
 }

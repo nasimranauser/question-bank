@@ -3,6 +3,7 @@ import icon from '../../public/account.png'
 import { ImMobile } from "react-icons/im";
 import { RiSortNumberAsc } from "react-icons/ri";
 import '../assets/styles/Login.css'
+import '../assets/styles/auth.css'
 import { NavLink, useNavigate } from 'react-router-dom'
 import {toast} from 'react-toastify'
 import {useAuth} from '../context/auth'

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import DatePicker from "react-datepicker";
 import { MdOutlineCastForEducation } from "react-icons/md";
 import { MdAccountBox } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci";
@@ -9,6 +8,7 @@ import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import "react-datepicker/dist/react-datepicker.css";
 import '../assets/styles/Register.css'
+import '../assets/styles/auth.css'
 import { useAuth } from '../context/auth';
 import { useNavigate, Navigate, NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -21,7 +21,7 @@ function Registercontent() {
     }
     // state managment
     const [user,setUser] = useState({
-        name:'', face:'face', dob:'', fname:'', mname:'', studentid: `QB${Math.random().toString(36).substr(2, 9)}ID`,
+        name:'', face:'face', dob:'', fname:'', mname:'', studentid: `qb${Math.random().toString(36).substr(2, 9)}id`,
        village:'', postcode:'',upazilla:'',zilla:'',
         email:'',phone:'',
         institute:'', session:'', classref:'', deparmentref:'',
@@ -164,7 +164,7 @@ function Registercontent() {
             }
         }            
     }
-    const handleDateSelect = ()=>{}
+
 
   return (
     <div className="register mt63">
@@ -192,13 +192,7 @@ function Registercontent() {
                </div>
            <div className="field">
                <label htmlFor="b">Date of birth</label>
-               <DatePicker name='dob'
-  selected={user.dob}
-  onSelect={handleDateSelect} //when day is clicked
-  onChange={(date) => {
-   setUser({...user, dob: date})
-  }}
-/>
+               <input type='date' name='dob' value={user.dob} onChange={(e)=> handleInput(e)} />
            </div>
            <div className="field">
                <label htmlFor="c">Father name</label>

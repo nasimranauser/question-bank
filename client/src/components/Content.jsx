@@ -15,8 +15,9 @@ import { FiArrowRightCircle } from "react-icons/fi";
 import { useAuth } from '../context/auth';
 
 function Content() {
-  const {isAuth, cUser} = useAuth();
+  const {isAuth, cUser, loadUser} = useAuth();
    useEffect( ()=>{
+    loadUser();
     getExam();
    },[]);
    const [exam, setExam] = useState([]);
