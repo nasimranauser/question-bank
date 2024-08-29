@@ -18,12 +18,17 @@ const questionMiddleware = async (req, res, next)=>{
         }
         // get value
         let userId = isVerified.userId;
+        let nuserId = isVerified.userId;
         const E = await Exam.findOne({_id:examId});
         const Qlenght = await Question.find();
         const len = Qlenght.length;
         const Q = await Question.aggregate([ {$match:{ identityexam: examId }}, { $sample:{size:len} },
             {
-                $lookup:{from:'answers', localField:'a', foreignField:'a', as: 'ansdata'}
+                $lookup:{
+                    from:'answers',
+                    localField:'_id',
+                    foreignField:'questionid',
+                    as: 'ansdata',}
             } // which user ans data.
          ]) // lookup. identityexam: examId
         // ans and question.

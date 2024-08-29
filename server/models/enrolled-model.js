@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const enrollSchema = new mongoose.Schema({
     userid:{
-        type:mongoose.Schema.ObjectId,
+        type:String,
         required:true,
     },
     username:{
@@ -12,7 +12,7 @@ const enrollSchema = new mongoose.Schema({
         required:true,
     },
     examid:{
-        type:mongoose.Schema.ObjectId,
+        type:String,
         required:true,
     },
     exname:{

@@ -10,22 +10,22 @@ import { useAuth } from '../context/auth';
 import { toast } from 'react-toastify';
 
 function JoinContent() {
-   
+    const {isAuth, cUser, token} = useAuth();
     const [enrollData, setData] = useState([])
     const [reqload, setreqload] = useState(true)
-    const {isAuth, cUser, token} = useAuth();
     const [livedate,setlivedate] = useState(null);
+
     // test
         const test = ()=>{
              return  setlivedate(new Date)
         }
         useEffect( ()=>{
-            test();
-        },[test]);
+            isAuth ? test() : setreqload(false)
+        },[]); // array depndency is a test
     // test
     const navigate = useNavigate();
     useEffect( ()=>{
-        getJoiningExam();
+        isAuth ? getJoiningExam() : setreqload(false)
     },[])
     // get minute.
 
@@ -81,6 +81,12 @@ function JoinContent() {
     const gdate = new Date(r.examdtime).toString().substring(0,15);
     const gtime = r.examtime;
     // machine
+    function machinedateint(date) {
+        let year = date.getFullYear();
+        let month = (1 + date.getMonth()).toString().padStart(2, '0');
+        let day = date.getDate().toString().padStart(2, '0');
+        return month + '/' + day + '/' + year;
+    }
     const date = new Date().toDateString();
         function AMPM(date) {
             var hours = date.getHours();
@@ -111,15 +117,19 @@ function JoinContent() {
     // step 1
         // step 2
             if(gampm == AMPM(livedate)){
+                const rep1 = formatAMPM(livedate).replace(AMPM(livedate), '').trim();
+            const range1 =  rep1.replace(':','.');
+            const prep2 = gtime.replace(gampm, '').trim();
+            const prange2 = prep2.replace(':','.');
                 // step 3
-                if(formatAMPM(livedate) >= gtime){
+                if(parseFloat(range1) >= parseFloat(prange2)){
                     message = 'Exam is started now. Rush to the exam center';
                     start = true;
                  }
             }
-    }else if(date>gdate){
+    }else if(machinedateint(new Date) > r.examdtime){ // 1
         finish = true;
-        message = "Exami date is over!";
+        message = "Exam date is over!";
     }
      // check, 4:30 is constand, but 4:30 is not constand.
     return(
@@ -130,19 +140,8 @@ function JoinContent() {
 <span>{gdate} {r.examtime} </span>
     </div>
     {finish ? <div style={{textAlign:'center'}}> <h3 style={{color:'red',marginBottom:8,}}>Exam is Finished</h3> </div> : ''}
-    <table>
-        <tbody>
-        <tr key={1}><th>Exam name</th> <td>{r.exname}</td><th>Exam Authority</th><td>{r.authority}</td></tr>
-        <tr key={2}><th>Enrolled Price</th> <td>{r.inprice}Tk</td><th>Join Schedule</th> <td style={{textAlign:'center'}}>{gdate}, {gtime}</td></tr>
-        <tr key={3}><th>Print Terms</th> <td><button className='ivbtn'>Click to Download</button></td><th>Print Invoice</th> <td><button className='ivbtn'>Click to Download</button></td></tr>
-        </tbody>
-        
-    </table>
-
-   
-        <p><IoMdInformationCircleOutline /> Make sure your smart phone/ computer - latop, microphone is ok, or don't work any device of your network, 10km is block</p>
-    
-   
+    <table><tbody><tr key={1}><th>Exam name</th><td>{r.exname}</td><th>Exam Authority</th><td>{r.authority}</td></tr><tr key={2}><th>Enrolled Price</th><td>{r.inprice}Tk</td><th>Join Schedule</th><td style={{textAlign:'center'}}>{gdate}, {gtime}</td></tr><tr key={3}><th>Print Terms</th><td><button className='ivbtn'>Click to Download</button></td><th>Print Invoice</th><td><button className='ivbtn'>Click to Download</button></td></tr></tbody></table>
+    <p><IoMdInformationCircleOutline /> Make sure your smart phone/ computer - latop, microphone is ok, or don't work any device of your network, 10km is block</p>
     <div className="btn_group">
     <button disabled={finish? true : false}><MdSettingsBackupRestore /> Return Exam</button>
     <NavLink to={`/question/${r.exname}/${r.examid}`}>

@@ -13,14 +13,12 @@ import { AiOutlineLoading } from "react-icons/ai";
 
 
 function QuestionContent() {
-  /* load question, put answer, compare question, load time, load controls */
-    const {token} = useAuth();
+    const {token, cUser} = useAuth();
     const [liveData, setliveData] = useState([]);
     const [examInfo, setEinfo] = useState([]);
     const [edtime, setedtime] = useState(0);
     const [etime, setetime] = useState(0);
     const [datalen, setdataLen] = useState(0);
-    let [identify, setidentify] = useState(null);
     const [ansLoading, setansLoading] = useState(false);
     const [reqload, setreqload] = useState(true);
     const [livedate,setlivedate] = useState(null);
@@ -57,46 +55,29 @@ function QuestionContent() {
                 setdataLen(rsdata.question.length);
                 setreqload(false)
             }else{
+                setreqload(false)
                 console.log(rsdata.message)
             }
         }catch(err){
             console.log(`question getting request error ${err}`)
         }
     }
-
-    // change answer input field.
      // input change.
      const handleInput = (e,index)=>{
         const {name, value} = e.target;
         const list = [...liveData];
         list[index][name] = value;
         setliveData(list);
-        console.log('input field change/ click')
       }
-
       // submitting answer
       const submitNow = async(index, params, ans, rs)=>{
-        if(ans =="" || ans == " " || ans.length < 1){
-          return alert('answer is required!')
-        }
+        if(rs==false){ if(ans =="" || ans == " " || ans.length < 1){ return alert('answer is required!') } }
         setansLoading(params);
-        // setsubmitLoading(params);
-        // // back respone then.
-        // setTimeout( ()=>{setsubmitLoading(false)},500)
-        // setprogressInfo({...progressInfo, complite: progressInfo.complite+1})
         const time = new Date().getHours() + ':' + new Date().getMinutes() + ':'+ new Date().getSeconds();
-        // let's check is Reject true or not.
-        console.log(`Index : ${index}, Token: ${token}, Exam Id: ${examId}, Question Id: ${params}, Answer: ${ans}, Reject Status: ${1}, Time: ${time}, Time Count: ${'5 min 2 sec'}`);
-        // make request.
         const data = {
-            examid:examId,
-            questionid:params,
-            getanswer:ans,
-            canstime:time,
-            timecount:'1 min 5 sec',
-            reject:rs,
+            examid:examId, questionid:params,getanswer:ans,
+            canstime:time,timecount:'1 min 5 sec',reject:rs,
         }
-        
         // make request.
         const url = 'http://localhost:3000/api/exam/answer/put';
         try{
@@ -110,21 +91,13 @@ function QuestionContent() {
             });
             const rsdata = await  response.json();
             if(response.ok){
-                // get load again question data. )) question data is compare to ans get question data.
                  getQuestion()
-                // let's check rejecttype, then show message
-                // lets' store async storage.
-                // localStorage.setItem('exits_exam',[{
-                // }]);
-                // localStorage.setItem('complited_exam',[{
-                // }]);
                 setansLoading('')
                 if(rsdata.message){
                 toast.error('question is rejected.')
                 }else{
                 toast.success('answer submitted.')
                 }
-                // loading.
             }else{
                 setansLoading('')
                 toast.warning(rsdata.message)
@@ -133,97 +106,81 @@ function QuestionContent() {
             console.log(`request send error ${err}`);
             
         }
-        // make request.
     }
- // date and time management.
-  // getting
   const gdate = new Date(edtime).toString().substring(0,15);
   const gtime = etime;
   // machine
+  function machinedateint(date) {
+    let year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+    return month + '/' + day + '/' + year;
+}
   const date = new Date().toDateString();
-  function AMPM(date) {
-      var hours = date.getHours();
-      var ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
-      var strTime =  ampm;
-      return strTime;
-    }
-  function formatAMPM(date) {
-      var hours = date.getHours();
-      var minutes = date.getMinutes();
-      var ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
-      minutes = minutes < 10 ? '0'+minutes : minutes;
-      var strTime = hours + ':' + minutes + ' ' + ampm;
-      return strTime;
-    }
-//   // compare only day and month || houre.
+    function AMPM(date) {
+        var hours = date.getHours();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        var strTime =  ampm;
+        return strTime;
+      }
+    function formatAMPM(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; 
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+      }
+
    let message = '';
    let start = false;
- 
-//    // hour and minute equal.
+
  try{
+    
     var gampm = gtime.slice(-2);
+
     if(date==gdate){
         message = 'Exam will start shortly.';
-    // step 2
-        // step 3
         if(gampm == AMPM(livedate)){
-            // step 4
-            if(formatAMPM(livedate) >= gtime){
+            const rep1 = formatAMPM(livedate).replace(AMPM(livedate), '').trim();
+            const range1 =  rep1.replace(':','.');
+            const prep2 = gtime.replace(gampm, '').trim();
+            const prange2 = prep2.replace(':','.');
+            if(parseFloat(range1) >= parseFloat(prange2)){
                 message = '';
                 start = true;
                 // time to complete.
                 var inttime = gtime.replace(gampm,'').trim();
                 var lastint = inttime.slice(-2);
                 var calcmin = parseInt(lastint)+parseInt(examInfo.timetocomplete);
-                // 2 sum >= 60 -> constands.
                 let ovhour=0;
-                if(calcmin==60){
-                    calcmin=0;
-                    ovhour=1;
-                    // # hour+1, min = 0.
-                    // 1. hour increase. and mini 0. 
-                    // start 55, completed 10, = 60 + 5.
-                    // 60 er besi koto royeche seta nite hobe. calmin -60 = curr min.
-                }else if(calcmin>60){
-                    ovhour=1;
-                    calcmin = calcmin-60;
-                    // # hour+1, min = calcmin - 60;
-                }
-                // calcmin>=60 ? calcmin = parseInt(examInfo.timetocomplete) : ''
+                if(calcmin==60){ calcmin=0; ovhour=1;}
+                else if(calcmin>60){ ovhour=1; calcmin = calcmin-60; }
                 let gethour;
                 inttime[1]==":" ? gethour = inttime.slice(0, 1) : gethour = inttime.slice(0, 2);
-                // ovhour ? gethour = parseInt(gethour)+1 : null;
                 const mergetime = parseInt(gethour)+ovhour+':'+calcmin+' '+gampm;
-                if(formatAMPM(livedate)>=mergetime){
-                    // change route, congratulation exam is finished, exam is over parse examid.
-                    navigate('/exam-finished')
-                }
+                const rep2 = mergetime.replace(gampm, '').trim();
+                const range2 = rep2.replace(':','.');
+                if(parseFloat(range1)>=parseFloat(range2)){ navigate('/exam-finished') }
              }
         }
-     }else if(date > gdate){
-        navigate('/')
-     }
-
- }catch(err){
-    console.error(err)
- }
+     }else if(machinedateint(new Date) > edtime) { navigate('/') } // 2
  
-   // date and time ended.
+ }catch(err){ console.log('')}
+ let cnt = 0;
+
   return (
     <div>
     {reqload != true ? 
     <div>
-   
     <div className="main_content mt63" style={{borderRadius:5,position:'relative',}}>
         <div className='waiting'>
-        
          <FaWifi className='wifi' />
             <h3>{start ? '' : <AiOutlineLoading className='loading' /> }&nbsp; {examInfo.name},  &nbsp; <span style={{color:'red'}}>{gdate}</span>, {etime}</h3>
-            
         </div>
     </div>
     <div className="inform informq">
@@ -237,27 +194,27 @@ function QuestionContent() {
    
         </div>
         <div className="numinform">
-            <span className='alignspan'><FaRecordVinyl /> <span className='s1'>{datalen}</span>/<span className='s2'>0</span>/<span className='s3'>0</span></span>
+            <span className='alignspan'><FaRecordVinyl /> <span className='s1'>{datalen}</span>/<span className='s2'>0</span><span className='s3'></span></span>
         </div>
     </div>
 
     <div className="data_context">
     {start ? <div> 
         {liveData.map( (r,i)=>{
-            let smbl=[];
-
+            let smbl=[]; var op;
 
             if(r.symbol == 'ক'){ smbl=['ক','খ','গ','ঘ']}
             else if(r.symbol=='a'){smbl=['A','B','C','D']}
             else if(r.symbol=='i'){smbl=['I','II','III','IV']}
-           
-            // var obj = r.ansdata[i].questionid ? r.ansdata[i].questionid : false;
-            // setidentify(0)
-            // check lenght, then this based set index.
-            console.log(r.ansdata)
+            else if(r.symbol=='1'){smbl=['1','2','3','4']}
+
+            if(r.ansdata.length>0){
+            function checka(id){ return id.userid === cUser._id }
+              if(r.ansdata.find(checka)){ op = r.ansdata[0].questionid;}else{op = null;}
+            }else{op = null;}
+
             try{
-            if(r._id!=r.ansdata[i].questionid || r._id == r._id){ // 0 index.
-                // if queistion user id == machine user id, then, compare.
+            if(r._id!=op){ 
             return(
                 <div key={i} className="txt_content">
                 {ansLoading==r._id ?  <div className='qloading'> Loading.. </div> : ''}
@@ -266,8 +223,6 @@ function QuestionContent() {
                     <div className='count'>{i+1}</div>
                     {r.question}</h1>
             <div className="cS4Vcb-pGL6qe-k1Ncfe">{r.qhint ? r.qhint : ''}</div>
-            {/* type */}
-             
                {r.type==1 ? 
                 <div className="op">
                     <div><input onClick={(e)=>handleInput(e,i)} name='answer' type="radio" id={r.option.oa} value={r.option.oa} /> <label htmlFor={r.option.oa}>{smbl[0]}) {r.option.oa}</label></div>
@@ -275,22 +230,16 @@ function QuestionContent() {
                     <div><input onClick={(e)=>handleInput(e,i)} name='answer' type="radio" id={r.option.oc} value={r.option.oc} /> <label htmlFor={r.option.oc}>{smbl[2]}) {r.option.oc}</label></div>
                     <div><input onClick={(e)=>handleInput(e,i)} name='answer' type="radio" id={r.option.od} value={r.option.od} /> <label htmlFor={r.option.od}>{smbl[3]}) {r.option.od}</label></div>
                 </div> 
-                : 
-                <div>
-                    {r.type==2 ? 
-                       <div>
+                :  <div> {r.type==2 ? <div>
                        <div className='main_content prvimg' style={{margin:'12px 0',}}> 
-                        <img src={r.refurl} />
-                       </div>
-                       <div className="op">
+                        <img src={r.refurl} /> </div>
+                   <div className="op">
                    <div><input onClick={(e)=>handleInput(e,i)} name='answer' type="radio" id={r.option.oa} value={r.option.oa} /> <label htmlFor={r.option.oa}>A) {r.option.oa}</label></div>
                    <div><input onClick={(e)=>handleInput(e,i)} name='answer' type="radio" id={r.option.ob} value={r.option.ob} /> <label htmlFor={r.option.ob}>B) {r.option.ob}</label></div>
                    <div><input onClick={(e)=>handleInput(e,i)} name='answer' type="radio" id={r.option.oc} value={r.option.oc} /> <label htmlFor={r.option.oc}>C) {r.option.oc}</label></div>
                    <div><input onClick={(e)=>handleInput(e,i)} name='answer' type="radio" id={r.option.od} value={r.option.od} /> <label htmlFor={r.option.od}>D) {r.option.od}</label></div>
-               </div> 
-                       </div>
-                        : 
-                      <div>
+               </div></div>
+                        : <div>
                       <div className='main_content prvimg' style={{margin:'12px 0',}}> 
                       <img src={r.refurl} />
                      </div>
@@ -305,55 +254,53 @@ function QuestionContent() {
                 <span onClick={()=>submitNow(i, r._id, r.answer, true)} className="iLgTbf indIKd cS4Vcb-pGL6qe-lfQAOe">
                     <MdOutlineCancel />
                     Leave</span>
-    
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span  onClick={()=>submitNow(i, r._id, r.answer, false)} className="iLgTbf indIKd cS4Vcb-pGL6qe-lfQAOe" >
                     <BsSend />
                     Answer</span>
             </div>
             </div>
-            ); }
-        }catch(err){console.log(' ')}
+            ) }else{cnt++; 
+                if(datalen==cnt){
+                    return navigate('/exam-finished')
+
+                } 
+            }
+        }catch(err){console.log('wrong ')}
         })}
       </div>
-      : 
-     <div>
-     <div class="wrapper">
-     <div class="wrapper-cell">
-         <div class="image"></div>
-         <div class="text">
-             <div class="text-line"> </div>
-             <div class="text-line"></div>
-             <div class="text-line"></div>
-             <div class="text-line"></div>
+      : <div> <div className="wrapper"> 
+      <div className="wrapper-cell">
+         <div className="image"></div>
+         <div className="text">
+             <div className="text-line"> </div>
+             <div className="text-line"></div>
+             <div className="text-line"></div>
+             <div className="text-line"></div>
          </div>
      </div>
-     <div class="wrapper-cell">
-         <div class="image"></div>
-         <div class="text">
-             <div class="text-line"></div>
-             <div class="text-line"></div>
-             <div class="text-line"></div>
-             <div class="text-line"> </div>
+     <div className="wrapper-cell">
+         <div className="image"></div>
+         <div className="text">
+             <div className="text-line"></div>
+             <div className="text-line"></div>
+             <div className="text-line"></div>
+             <div className="text-line"> </div>
          </div>
      </div>
-     <div class="wrapper-cell">
-         <div class="image"></div>
-         <div class="text">
-             <div class="text-line"></div>
-             <div class="text-line"></div>
-             <div class="text-line"></div>
-             <div class="text-line"></div>
+     <div className="wrapper-cell">
+         <div className="image"></div>
+         <div className="text">
+             <div className="text-line"></div>
+             <div className="text-line"></div>
+             <div className="text-line"></div>
+             <div className="text-line"></div>
          </div>
      </div>
  </div>
      </div>
-    }
-
-    </div>
-    </div>
-    : <div className='mt63'><div style={{textAlign:'center',padding:50,fontSize:17,fontWeight:500}}> Loading... </div> </div> }
-    </div>
+    } </div> </div>
+    : <div className='mt63'><div style={{textAlign:'center',padding:50,fontSize:17,fontWeight:500}}> Loading... </div> </div> } </div>
   )
 }
 
