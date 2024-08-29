@@ -15,7 +15,7 @@ const app = express();
 // application setting.
 app.use(cors({
     origin:'*', // http://localhost:5173
-    methods: ["GET", "POST", "PATCH", "DELETE"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
 }))
 app.use(express.json())

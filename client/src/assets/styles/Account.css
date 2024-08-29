@@ -1,0 +1,14 @@
+
+.content_img{position: relative;}
+.content_img svg {
+    position: absolute;
+    font-size: 33px;
+    background: linear-gradient(45deg, #0080008a, green, transparent);
+    color: #fff;
+    border-radius: 15px;
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, .2);
+    cursor: pointer;
+    bottom: 15px;
+    right: -6px;
+    padding: 2px;
+}

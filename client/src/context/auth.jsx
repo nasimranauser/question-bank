@@ -43,7 +43,7 @@ export const AuthProvider = ({children})=>{
            console.error(err)
         }
     }
-    return <AuthContext.Provider value={{token,cUser, isAuth, storeTokenLS, removeToken}}>
+    return <AuthContext.Provider value={{token,cUser, isAuth, storeTokenLS, removeToken, loadUser}}>
         {children}
     </AuthContext.Provider>
 }

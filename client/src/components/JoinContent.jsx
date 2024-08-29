@@ -116,15 +116,21 @@ function JoinContent() {
     var gampm = gtime.slice(-2);
     // step 1
         // step 2
-            if(gampm == AMPM(livedate)){
+            if(AMPM(livedate) == gampm){
+                console.log('am,pm true')
                 const rep1 = formatAMPM(livedate).replace(AMPM(livedate), '').trim();
             const range1 =  rep1.replace(':','.');
             const prep2 = gtime.replace(gampm, '').trim();
             const prange2 = prep2.replace(':','.');
+            // pm = 12:00PM, 1:00PM porblem is this. 
                 // step 3
                 if(parseFloat(range1) >= parseFloat(prange2)){
+                    // porblem 1
                     message = 'Exam is started now. Rush to the exam center';
                     start = true;
+                 }else{console.log('range 1 and range 2 not match!');
+                    console.log(prange2);
+                    
                  }
             }
     }else if(machinedateint(new Date) > r.examdtime){ // 1

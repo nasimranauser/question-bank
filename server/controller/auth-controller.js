@@ -61,6 +61,22 @@ const register = async (req, res, next)=>{
     }
   }
 
+const updateuser = async(req, res, next)=>{
+    try{
+        const d = req.body;
+        const op = await Student.updateOne({_id: d.uid}, {$set: {name:d.name, face:d.face, dob:d.dob, 
+            fname:d.fname , mname:d.mname , village: d.village, postcode:d.postcode , upazilla: d.upazilla , zilla: d.zilla , email: d.email , phone:d.phone , institute: d.institute , session: d.session , 
+            classref: d.classref , deparmentref: d.deparmentref } });
+            if(!op){
+                return res.status(401).json({message:'update faild!'});
+            }
+            res.status(201).json({message:"updated"});
+
+    }catch(err){
+        next(err)
+    }
+}
+
 const test = async (req, res, next)=>{
     try{
         const data = req.body;
@@ -72,4 +88,4 @@ const test = async (req, res, next)=>{
     }
 }
 
-module.exports = {home, register, login, cuser, test,}
+module.exports = {home, register, login, cuser, updateuser, test,}
