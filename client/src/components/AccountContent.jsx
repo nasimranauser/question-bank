@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import '../assets/styles/Overview.css'
 import { MdOutlineArrowBack } from "react-icons/md";
-import { IoSettingsOutline } from "react-icons/io5";
-import { RiPrinterCloudFill } from "react-icons/ri";
-import { CiShare2 } from "react-icons/ci";
-import { IoIosLink } from "react-icons/io";
-import { RiGlobalLine } from "react-icons/ri";
+import { IoSettingsOutline } from "react-icons/io5"
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/auth';
-import { CgProfile } from "react-icons/cg";
-import { PiReadCvLogo } from "react-icons/pi";
+import profile from '../assets/img/profile.png'
+
 function AccountContent() {
     const [loading, setLoad] = useState(false);
     const {isAuth, cUser, token} = useAuth();
@@ -36,67 +32,24 @@ function AccountContent() {
 </div>
 <div className="data_context" style={{height:'71.4vh'}}>
 <div className="exam_content">
-<div className="main_content bgmc" style={{position:'relative',}}>
+<div className="main_content bgmc" style={{position:'relative',justifyContent:'center'}}>
 
 <div className='profile_img'>
     <div className='content_img'>
-        <img src="./profile.png" alt="" />
+        <img src={profile} alt="" />
     </div>
 </div>
-<div className='accesslink'>
+{/* <div className='accesslink'>
     <CiShare2 />
     <IoIosLink />
     <RiGlobalLine />
+</div> */}
 </div>
-</div>
 
-<div className="t2 tu" style={{background:'#ffff',boxShadow:'none'}}>
-    <table className='bnone'>
-        <tr>
-            <th>Name</th>
-            <td>{cUser.name}</td>
-            <th>Date of Birth</th>
-            <td>{cUser.dob}</td>
-        </tr>
-        <tr>
-            <th>Father's Name</th>
-            <td>{cUser.fname}</td>
-            <th>Mother's Name</th>
-            <td>{cUser.mname}</td>
-        </tr> <tr>
-            <th>Mobile No</th>
-            <td>{cUser.phone}</td>
-            <th>Student ID</th>
-            <td>{cUser.studentid}</td>
-        </tr>
-        <tr>
-            <th>P. Address</th>
-            <td colSpan={'3'} style={{textAlign:'center'}}>{cUser.village}, {cUser.postcode} - {cUser.upazilla}, {cUser.zilla}</td>
-        </tr>
-        <tr>
-            <th>School/ College</th>
-            <td>{cUser.institute}</td>
-            <th>Qualification</th>
-            <td>{cUser.classref} - {cUser.session}</td>
-            
-        </tr>
-        <tr>
-            <th>IP Address</th>
-            <td style={{color:'red'}}>{cUser.ipaddress}</td>
-        </tr>
-
-        <tr>
-            <td colSpan={'4'}>
-                <div className='pbtn' style={{color:'green',textAlign:'center',justifyContent:'center'}}>
-                {/* <button><RiPrinterCloudFill /> Print Document</button>
-                <button ><PiReadCvLogo /> Open Portfolio</button> 
-                <button ><IoSettingsOutline /> Edit Information</button> */}
-                Development mode is turn on
-                </div>
-            </td>
-        </tr>
-    </table>
-
+<div className="t2 tu space8" style={{background:'#ffff',boxShadow:'none'}}>
+    <table className='bnone'><tbody><tr key={1}><th>Name</th><td>{cUser.name}</td><th>Date of Birth</th><td>{cUser.dob}</td></tr><tr key={2}><th>Father's Name</th><td>{cUser.fname}</td><th>Mother's Name</th><td>{cUser.mname}</td></tr><tr key={3}><th>Mobile No</th><td>{cUser.phone}</td><th>Student ID</th><td>{cUser.studentid}</td></tr>
+    <tr key={5}><th>Institute Name</th><td>{cUser.institute}</td><th>Qualification</th><td>{cUser.classref} - {cUser.session}</td></tr>
+    <tr key={4}><th> Address</th><td style={{textAlign:'center'}}>{cUser.village}, {cUser.postcode} - {cUser.upazilla}, {cUser.zilla}</td><th>IP Address</th><td style={{color:'red'}}>{cUser.ipaddress}</td></tr><tr key={7}><td colSpan={'4'}><div className='pbtn' style={{color:'green',textAlign:'center',justifyContent:'right'}}><NavLink to={'/edit-profile'}><button ><IoSettingsOutline /> Edit Profile</button></NavLink></div></td></tr></tbody></table>
 </div>
 
 

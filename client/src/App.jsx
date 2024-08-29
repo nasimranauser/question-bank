@@ -18,6 +18,7 @@ import LoginScreen from './pages/LoginScreen';
 import { Logout } from './pages/Logout';
 import HomeRoute from './pages/HomeRoute';
 import Examfinisehd from './pages/Examfinisehd';
+import Editprofile from './pages/Editprofile';
 
 
 function App() {
@@ -53,6 +54,7 @@ theme="light"
         <Route path="/completed-exam" element={<Completedexamscreen />} /> 
         <Route path="/history" element={<HistoryScreen />} /> 
         <Route path="/my-profile" element={<AccountScreen />} /> 
+        <Route path="/edit-profile" element={<Editprofile />} /> 
         <Route path='*' element={<ErrorScreen />} />
       </Routes>
     </BrowserRouter>
