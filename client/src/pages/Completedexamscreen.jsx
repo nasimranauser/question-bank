@@ -7,7 +7,6 @@ import CompletedContent from '../components/CompletedContent'
 function Completedexamscreen() {
   return (
     <>
-        <Navbar />
         <CompletedContent />
         <Footer />
     </>

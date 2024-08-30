@@ -6,7 +6,6 @@ import JoinContent from '../components/JoinContent'
 function JoinScreen() {
   return (
     <>
-        <Navbar />
         <JoinContent />
         <Footer />
     </>

@@ -32,7 +32,7 @@ function Editprofile() {
   }
     const saveprofile = async(e)=>{
       e.preventDefault();
-      const url = 'http://localhost:3000/api/auth/update';
+      const url = `${window.location.origin}/api/auth/update`;
       // let's check valid or not.
       if(data.name && data.dob && data.fname && data.mname && data.village && data.postcode
         && data.upazilla && data.zilla && data.email && data.phone && data.institute && data.session

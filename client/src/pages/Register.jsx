@@ -11,7 +11,6 @@ function Register() {
   console.log(isAuth)
   return (
     <>
-        <Navbar />
             <Registercontent />
         <Footer />
     </>

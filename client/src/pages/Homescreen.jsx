@@ -6,7 +6,6 @@ import Content from "../components/Content";
 const Homescreen = ()=>{
     return(
         <>
-           <Navbar />
             <Content />
            <Footer />
         </>

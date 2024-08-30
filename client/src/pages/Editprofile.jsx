@@ -7,7 +7,6 @@ import '../assets/styles/Overview.css'
 function Editprofile() {
   return (
     <div>
-        <Navbar />
         <Editcontent />
         <Footer />
     </div>

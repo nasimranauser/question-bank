@@ -27,7 +27,7 @@ function Login() {
       }
       const login = async()=>{
           if(user.phone!='' && user.studentid!=''){
-            const url = 'http://localhost:3000/api/auth/login';
+            const url = `${window.location.origin}/api/auth/login`;
             try{
               const response = await fetch(url, {
                   method:'POST',

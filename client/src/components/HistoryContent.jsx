@@ -21,7 +21,7 @@ function HistoryContent() {
     },[]);
     
     const getExam = async (paramsid)=>{
-        const url = `http://localhost:3000/api/exam/getone/`;
+        const url = `${window.location.origin}/api/exam/getone/`;
         try{
             const response = await fetch(url, {
                 method: "GET",

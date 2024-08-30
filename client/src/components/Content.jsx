@@ -24,7 +24,7 @@ function Content() {
    const [loadexam, setloadexam] = useState(true);
    // gettting question
     const getExam = async()=>{
-        const url = 'http://localhost:3000/api/exam/get';
+        const url = `${window.location.origin}/api/exam/get`;
         try{
             const response = await fetch(url, {
                 method: "GET",
@@ -67,7 +67,7 @@ function Content() {
             },
             hassanswer:"<table><tr><th></th></tr><tr><td></td></tr></table>"
         }
-        const url = 'http://localhost:3000/api/exam/question/add';
+        const url = `${window.location.origin}/api/exam/question/add`;
         try{
             const response = await fetch(url, {
                 method:"POST",
@@ -137,7 +137,7 @@ function Content() {
             },
             price:180,
         }
-        const url = 'http://localhost:3000/api/exam/add';
+        const url = `${window.location.origin}/api/exam/add`;
         try{
             const response = await fetch(url, {
                 method:"POST",
@@ -163,7 +163,7 @@ function Content() {
 
     const lookupdata = async()=>{
         try{
-            const url = 'http://localhost:3000/api/admin/lookup';
+            const url = `${window.location.origin}/api/admin/lookup`;
             const response = await fetch(url, {
                 method:"GET",
                 headers:{

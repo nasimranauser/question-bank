@@ -7,7 +7,6 @@ const AccountScreen = ()=>{
     
     return(
         <>
-           <Navbar />
             <AccountContent />
            <Footer />
         </>

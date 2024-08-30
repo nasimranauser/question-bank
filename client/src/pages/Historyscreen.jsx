@@ -7,7 +7,6 @@ import HistoryContent from '../components/HistoryContent'
 function HistoryScreen() {
   return (
     <>
-        <Navbar />
         <HistoryContent />
         <Footer />
     </>

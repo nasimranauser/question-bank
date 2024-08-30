@@ -7,7 +7,6 @@ import Login from '../components/Login'
 function LoginScreen() {
   return (
     <div>
-      <Navbar />
       <Login />
       <Footer />
     </div>

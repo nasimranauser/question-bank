@@ -19,7 +19,7 @@ function CompletedContent() {
      isAuth ?  gcdata() : '';
    },[]);
    const gcdata = async()=>{
-    const url = 'http://localhost:3000/api/exam/completed';
+    const url = `${window.location.origin}/api/exam/completed`;
     try{
         const response = await fetch(url, {
             method:"GET",
@@ -31,7 +31,7 @@ function CompletedContent() {
         const rs = await response.json();
         if(response.ok){
            console.log('ok');
-           
+           setcData(rs.data)
         }else{console.log(rs.message)}
     }catch(err){
         console.error(err)
@@ -59,20 +59,23 @@ function CompletedContent() {
  <div style={{textAlign:'center',padding:'10px 15px',background:'#f0fdfead'}}> <h3 style={{color:'#333333e8',fontWeight:500,}}>Not found! You haven't Completed any Exam!</h3> </div> 
 :
 <div>
-<div className="t2 tu">
+{cData.map( (r, i)=>{
+    const gdate = new Date(r.examdtime).toString().substring(0,15);
+    return(
+        <div className="t2 tu">
     <div className="quickinfo">
-    <h3>1</h3>
-<marquee>Powered by - Nabodhar Bidda Niketon</marquee>
-<span>12 Jan 2024, 12:00PM </span>
+    <h3>{i+1}</h3>
+<marquee>Powered by - {r.authority}</marquee>
+<span>{gdate}, {r.examtime} </span>
     </div>
     <table>
         <tr>
-            <th>Exam name</th> <td>HSC ICT Pleminary Exam</td>
-            <th>Exam Authority</th> <td>ABC Coaching Center</td>
+            <th>Exam name</th> <td>{r.exname}</td>
+            <th>Exam Authority</th> <td>{r.authority}</td>
         </tr>
         <tr>
-            <th>Enrolled Price</th> <td>105Tk</td>
-            <th>Join Schedule</th> <td>12, Jan 2024, 12:00PM</td>
+            <th>Enrolled Price</th> <td>{r.inprice}Tk</td>
+            <th>Join Schedule</th> <td>{gdate}, {r.examtime}</td>
         </tr>
         <tr>
             <th>Print Terms</th> <td>Link</td>
@@ -95,6 +98,8 @@ function CompletedContent() {
    
 
 </div>
+    )
+})}
 </div>
 
 }

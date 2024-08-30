@@ -30,7 +30,7 @@ function OverviewContent() {
     },[]);
     
     const getExam = async ()=>{
-        const url = `http://localhost:3000/api/exam/get/${params.id}/${isAuth? cUser._id : null}`;
+        const url = `${window.location.origin}/api/exam/get/${params.id}/${isAuth? cUser._id : null}`;
         try{
             const response = await fetch(url, {
                 method: "GET",
@@ -71,7 +71,7 @@ function OverviewContent() {
         joinExam(token, nexam._id);
     }
     const joinExam = async (token, examid)=>{
-        const url = 'http://localhost:3000/api/exam/enroll';
+        const url = `${window.location.origin}/api/exam/enroll`;
         try{
             const response = await fetch(url, {
                 method: "POST",
@@ -109,7 +109,7 @@ function OverviewContent() {
 </div>
 </div>
 {loading ? 
- 'Loading...'
+ <div style={{fontSize:17,color:'#333',textAlign:'center',padding:60,}}> Loading... </div>
  :     <div>
  <div className="data_context" >
  <div className="main_content" style={{borderRadius:6}}>

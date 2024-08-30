@@ -50,7 +50,7 @@ function AccountContent() {
     formData.append("image", image);
 
    try{
-    const response = await fetch('http://localhost:3000/upload-image',{
+    const response = await fetch(`${window.location.origin}/upload-image`,{
       method:"POST",
       headers:{
         'uid':cUser._id,

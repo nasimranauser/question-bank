@@ -24,7 +24,7 @@ export const AuthProvider = ({children})=>{
     }
     // load function
     const loadUser = async ()=>{
-        const  url = 'http://localhost:3000/api/auth/cuser';
+        const  url = `${window.location.origin}/api/auth/cuser`;
         try{
             const respone = await fetch(url, {
                 method: "GET",

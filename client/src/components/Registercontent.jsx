@@ -128,7 +128,7 @@ function Registercontent() {
 
     const submit = async()=>{
         // loading start
-        const url = 'http://localhost:3000/api/auth/register';
+        const url = `${window.location.origin}/api/auth/register`;
         if(user.phone==''){
             toast.warning('Enter your phone number!')
         }else if(user.ipaddress==''){

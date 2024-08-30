@@ -19,6 +19,7 @@ import { Logout } from './pages/Logout';
 import HomeRoute from './pages/HomeRoute';
 import Examfinisehd from './pages/Examfinisehd';
 import Editprofile from './pages/Editprofile';
+import Navbar from './components/Navbar';
 
 
 function App() {
@@ -40,7 +41,9 @@ theme="light"
 />
 <ToastContainer />
       <div className="app_content">
+     
       <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Homescreen />} /> 
         <Route path="/home" element={<HomeRoute />} /> 

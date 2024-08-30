@@ -6,7 +6,6 @@ import QuestionContent from '../components/QuestionContent'
 function Questionscreen() {
   return (
     <>
-        <Navbar />
         <QuestionContent />
         <Footer />
     </>

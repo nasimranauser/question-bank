@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom'
 function Examfinisehd() {
   return (
     <div>
-      <Navbar />
       <div style={{marginTop:70,}}>
        <div style={{border:'2px solid green',padding:12,textAlign:'center'}}>
        <h3>Exam Finisehd</h3>

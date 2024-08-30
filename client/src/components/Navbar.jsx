@@ -13,14 +13,13 @@ function Navbar() {
   const logoutNow = ()=>{
     navigate('/logout');
   }
-
   return (
     <div className="top_content">
     <div className="p1">
         <div className="profile">
             <div className="avater">
               {isAuth == false ? <NavLink to={'/register'}><FaUser /> Create Account</NavLink> : ''} 
-              {isAuth == true ? <img src={userimg} title={ cUser.name} alt={cUser.name} /> : ''}
+              {isAuth == true ? <img src={cUser.face=='face'?userimg:`../src/images/students/${cUser.face}`} title={ cUser.name} alt={cUser.name} /> : ''}
             </div>
            
             {isAuth == true ? <div className='utxt'>

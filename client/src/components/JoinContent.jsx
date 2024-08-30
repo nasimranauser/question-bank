@@ -30,7 +30,7 @@ function JoinContent() {
     // get minute.
 
     const getJoiningExam = async ()=>{
-        const url = 'http://localhost:3000/api/exam/joining';
+        const url = `${window.location.origin}/api/exam/joining`;
         try{
             const response = await fetch(url, {
                 method: "GET",
@@ -117,7 +117,6 @@ function JoinContent() {
     // step 1
         // step 2
             if(AMPM(livedate) == gampm){
-                console.log('am,pm true')
                 const rep1 = formatAMPM(livedate).replace(AMPM(livedate), '').trim();
             const range1 =  rep1.replace(':','.');
             const prep2 = gtime.replace(gampm, '').trim();

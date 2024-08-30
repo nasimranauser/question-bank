@@ -36,7 +36,7 @@ function QuestionContent() {
 
     // function to get question
     const getQuestion = async ()=>{
-        const url = 'http://localhost:3000/api/exam/question/get';
+        const url = `${window.location.origin}/api/exam/question/get`;
         try{
             const response = await fetch(url, {
                 method: "GET",
@@ -79,7 +79,7 @@ function QuestionContent() {
             canstime:time,timecount:'1 min 5 sec',reject:rs,
         }
         // make request.
-        const url = 'http://localhost:3000/api/exam/answer/put';
+        const url = `${window.location.origin}/api/exam/answer/put`;
         try{
             const response = await fetch(url, {
                 method:"POST",
